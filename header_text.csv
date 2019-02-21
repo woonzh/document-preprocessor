@@ -1,0 +1,185 @@
+,header,text
+0,A. Executive Summary,"
+Amaris AI is developing a virtual assistant (chatbot) for the purpose of replicating the services and responses expected of a human service staff. The virtual assistant could take the form of a backend engine providing conversational responses based on knowledge bases, backend databases or predefined answers. The chatbot has an application layer, if required, to facilitate the conversation sessions.
+This document states the scope, assumptions and design for the 3 phases of Telekom Malaysia’s virtual assistant (chatbot) implementation."
+1,B.1 Scope Inclusions,"
+Natural Language Processing for the purpose of:
+Language detection (English, Bahasa Malaysia, Chinese)
+Language interpretation (including selected short forms and jargons, to be collectively decided with Telekom Malaysia)
+Query response in detected language
+Natural Language Understanding which includes:
+Entity Extraction (Common entity types and industry / Telekom Malaysia exclusive entity groups and list)
+Context retention and utilization in subsequent conversation tiers
+Able to understand inputs with certain levels of inaccuracy such as grammatical errors, spelling errors, incomplete sentences etc. (Up to tolerable inaccuracy levels)
+Intent classification for inputs, including default fallback for unfulfilled / out of scope questions.
+Machine learning / recurrent learning 
+Recurrent learning / model correction based on user input interpretation or admin triggered re-tagging / correction
+Able to conduct retraining of classification / extraction models through the removal, insertion or correction of input parameters and subsequent retraining
+Able to self-learn from user selection for queries with close answers (intents with relatively similar probabilities)
+Chat Analytics
+Able to conduct data aggregation on various profiles such as user profile, conversation / intent profile, channel profiles
+Able to identify / assist in the identification of trends in conversations
+Provision of dashboard with filters and report exporting functionality
+Query prediction based on various parameters such as user profile, seasonality etc.
+Various analytics functions such as unfulfillment tracking, other business requirements.
+Will expose necessary API endpoints in the required formats (XML, JSON) and protocol (RESTful, SOAP)
+Will support the following browsers for the administrator module:
+IE version 8 and above
+Mozilla Firefox version 28 and above
+Google Chrome version 33 and above
+Safari Version 8 and above
+Support module for chatbot lifecycle activities
+Support speech recognition (speech to text) and text to speech
+Support for multiple conversation tier
+Able to pass chat session to agent based on user intent or specific conditions
+Administrator module for:
+Chatbot creation and training
+Conversation review, retagging and retraining.
+Chatbot configuration and deployment
+Simulation and testing module
+Analytics and reporting module 
+Relevant user access and activities logging"
+2,B.2 Scope Exclusions,"
+We will need additional clarifications / support for the following scopes
+Infrastructure setup, requirements and deployment
+Support for mobile browsers
+Tool for custom logic creation in task execution
+Tool to configure chatbot for special and adhoc events
+Integration with Telekom Malaysia Middleware"
+3,B. Understanding of Scope of Work,"
+The solution aims to provide a virtual assistant to power the chatbot channels currently used for user engagement. The virtual assistant is expected to interpret user intention, extract key entities and provide suitable responses based on the above conditions. The virtual assistant is also expected to convert user input into contextual queries for knowledge bases or backend databases. 
+The virtual assistant is also expected to have a administrator module for the management, training and deployment of the chatbot. User access control and logs will be based on Telekom Malaysia’s NetIQ system. "
+4,C.1 Assumptions,"
+Telekom Malaysia will be providing the following information:
+List of special entity types and the corresponding entity list
+List of technical jargons and common short forms
+Expected data retention period
+Infrastructure setup at Telekom Malaysia’s desired server / cloud host will be conducted by Tech Mahindra
+Telekom Malaysia will advise on the desired analytics areas and insights, including but not limited to:
+Areas of interest in consumer aggregated analytics such as trends based on selected profile parameters etc.
+Customer profiling parameters
+Basis of sentiment classification
+Areas of user engagement to monitor / improve
+Interested parameters or areas for user query prediction
+Telekom Malaysia will advise on desired reports, fields etc.
+Telekom Malaysia will advise on expected API exposure other than those essential for stated chatbot functionalities
+Telekom Malaysia will advise on expected user experience in specific modules, if there is. Else in-depth requirements gathering and conceptualization will be done at a later date."
+5,C.2 Dependencies,"
+Connectivity and access to Telekom Malaysia’s channels / systems / infrastructure for integration development, testing and production deployment
+Efficiency in the provision of data / information / access by Telekom Malaysia
+
+"
+6,C. General Assumptions,
+7,D.1.1.1 Chatbot training and evaluation module,"
+This module will provide the user interface to create, update and train the chatbot. The administrator will be able to conduct activities such as intent training, entity labelling, action definition, document upload etc. 
+The administrator will also be able to review conversation history and the corresponding classification, replies and actions. Erroneous tagging, extraction or classification can be corrected in this module."
+8,D.1.1.2 Simulation and testing module,"
+This module will provide the user interface to simulate client conversations with the various versions of the chatbot before / after deployment. The administrator will be able to review the model output parameters, classification and the respective values such as probability etc."
+9,D.1.1.3 Chatbot deployment and management module,"
+This module will provide the user interface for chatbot version and status control as well as the deployment across various integration channels. Chatbot utilisation statistics will be available as well for convenient review and management."
+10,D.1.1.4 Access and activities management module,"
+This module will provide the user interface to review and manage user access to the administrator portal and the actions conducted during the login session. Access rights can also be managed or issued as well."
+11,D.1.1.5 Monitoring and reporting module,"
+This module will provide the chat and channel analytics and reports as requested. Users will be able to query specific parameters and export the report with certain data filters. User profiles will be retrievable here as well."
+12,D.1.1 Application Layer,"
+The application layer will provide the user interface for access to the chatbot’s administrator functions. It will communicate with the logic and connectivity layer for various purposes such as model training, testing and deployment."
+13,D.1.2.1 Model training controller,"
+The model training controller will interface between the application layer (chatbot training and evaluation module), model layer and database layer for the purpose of model training / retraining. Based on the signals from the application layer, the controller will orchestrate the document processing upon knowledge base ingestion, intent classifier training, entity extractor training etc."
+14,D.1.2.2 Input processing controller,"
+The query processing controller will interface with the application layer (simulation and testing module) or the chatbot channels integrator to receive signals for testing purposes or client queries respectively.
+The controller will interface with the session controller for conversation tier management and logging purposes.
+The controller will also interface with the model layer and database later to orchestrate the intent classification, action execution or machine comprehension as required. "
+15,D.1.2.3 Chatbot channels integrator,"
+The channel integrator will interface with the interaction channels such as the live chat platforms and social media platforms.
+We will need Tech Mahindra’s help on this."
+16,D.1.2.4 Middleware & DB integrator,"
+The middleware integrator will interface with Telekom Malaysia’s backend systems such as Oracle SOA suite, Tibco and MuleSoft.
+We will need Tech Mahindra’s help on this."
+17,D.1.2.5 Monitoring and reporting controller,"
+The monitoring and reporting controller will monitor, and aggregate chat analytics required such as channel statistics, intent statistics, fulfilment statistics, user profiles etc. The controller will coordinate the ETL process, analytics and the reports generation / scheduling."
+18,D.1.2.6 Session controller,"
+The session controller will manage the conversation tiers for each chatbot session for context management, access control management and session logging as required.
+User profile extraction for intent prediction / suggestion will be managed by the controller as well"
+19,D.1.2.7 Access management integrator,"
+The access management integrator will interface with Telekom Malaysia’s ID Management System for user information retrieval for access control and logging as required.
+Tech Mahindra will provide the necessary end points and authentication methods for the above interface."
+20,D.1.2 Logic Layer,
+21,D.1.3.1 NER layer,"
+The Named Entity Recognition (NER) layer will identify and classify specific entities from the queries or the knowledge base as required. The NER layer will be trained on commonly known entities such as places, names etc. but can be expanded to include technical jargons or common short forms etc. We will need Telekom Malaysia provision on the additional entity types, corresponding list and technical jargons."
+22,D.1.3.2 NLP layer,"
+The Natural Language Processing (NLP) layer will conduct pre-processing on the queries or the knowledge base as required. The cleaning, normalisation etc. is important for higher intent classification accuracy."
+23,D.1.3.3 Action trainer,"
+The action trainer or executor will handle complex actions following the intent classification and entity extraction which may require defined database queries or execution."
+24,D.1.3.4 Intent classification model,"
+The intent classification model will work on the processed text to interpret and classify the intent behind the query. It is also used as one of the layers in the knowledge base ingestion and processing as well."
+25,D.1.3.5 Context manager,"
+The context manager will provide additional representation to the query processing layers such as intent classification, action trainer etc. It is important for contextual awareness across multiple conversation tiers in a single session."
+26,D.1.3.6 Language Classifier model,"
+The language classifier model will conduct classification on a specific text corpus based on a pre-defined set of languages. The classification will be done in batches to allow for identification of multiple languages in a corpus. Documents will multiple languages will be segmented as well."
+27,D.1.3.7 Document decoder,"
+The document decoder will primarily classify the document into 2 categories (images based and text-based document). "
+28,D.1.3.8 Object detection model,"
+The object detection model is needed for non-text-based documents during the knowledge base ingestion. Object types include graphics, text, tables etc. Object detection is essential, and the processing needed for each type will be different. This model will identify and classify the various objects within the knowledge base"
+29,D.1.3.9 OCR model,"
+The Optical Character recognition model is needed for non-text-based documents during the knowledge base ingestion. The model will convert images to text-based characters based on the selected language."
+30,D.1.3.10 Data reconstruction model,"
+The data reconstruction model will ingest the annotated datasets for specific segments of the documents. Based on the data type (images, table, text etc.), the model will reconstruct the dataset to a human readable format, preserving the original presentation as much as possible."
+31,D.1.3.11 Document processer,"
+The document processer will be used for text-based documents during the knowledge base ingestion. The processor will conduct clustering and annotation for the information / text within the document for subsequent processing."
+32,D.1.3.12 Language representation model,"
+The language representation model will generate semantic representations for text in the knowledge base ingested. Extracted / converted text will be broken down into tokens and passed through the model for contextually aware representations / embeddings."
+33,D.1.3.13 Machine comprehension model,"
+The machine comprehension model will extract the answer to a query from a specified text corpus. The model will be built upon the output of the language representation model for contextually aware response. "
+34,D.1.3 Model layer,
+35,D.1.4.1 Knowledge base,"
+The knowledge base layer will store the weights for the various layers in each model. These weights will be retrieved during input processing for various purposes such as intent classification, NER machine comprehension etc.
+The knowledge base layer will also store the embeddings for the documents ingested during admin training as well. Each document may have multiple embeddings depending on which models are needed for interpretation and prediction. "
+36,D.1.4.2 Documents database,"
+The documents database will be a file storage system to store the pre-processed and processed documents as uploaded by the admin for document processing."
+37,D.1.4.3 Session and access logs,"
+The session and access logs database will record user access details and the transactions made during the session. "
+38,D.1.4 Database layer,
+39,D.1 System design,"
+Fig 1 System design (overview)"
+40,D.2 Document ingestion and chatbot training,"
+Fig 2. Document Ingestion architecture
+Fig 2 shows the architecture for document processing which includes FAQs, user manuals etc. 
+Documents uploaded through the application layer (Chatbot training and evaluation module) will be passed to the model training controller which will orchestrate the model utilisation / re training as required. 
+Based on the document type (image / text based) as identified by the document decoder, the controller will either pass it to the image processing cluster or direct to the document comprehension cluster.
+The image processing cluster seeks to identify, extract and convert segments of the image-based document into annotated datasets for the document comprehension cluster to digest. Object types include images, tables, text etc.
+The document comprehension cluster seeks to first segment the document into meaningful header and content groups for an efficient filtration model. Subsequently, the groups are encoded into semantically meaningful representations, based on the language detected, which will be used as a base for the comprehension model. 
+All weights, documents and encoded representations will then be stored into the database layer for application use.
+For recurrent learning purposes, the intent classifier will be retrained to be directed at the new document section. The machine comprehension model will be retrained if the answer span has been corrected.
+Fig 3. Chatbot Training architecture
+Fig 3 shows the architecture for other areas of chatbot training which includes NER, intent classification and action definition. 
+Based on the inputs from the application layer, the model training controller will orchestrate the model utilisation / re training as required. 
+The pre-trained layer will provide text pre-processing for the generalisation and cleaning of the training questions, context management and language identification. It will be called upon first by the controller.
+The NER model will be trained upon admin defined entity sets and location within sentences / questions. NER will be utilised for entity extraction which will be used to populate specific action fields (database query fields etc.)
+The intent classification model will be trained upon processed question list through statistical and semantic methods to provide contextually aware models with language understanding. 
+Finally, the action trainer will integrate with the NER to populate admin defined queries with the extracted entities. The trainer will also integrate with the middleware integrator to execute the queries.
+For recurrent learning purposes, the intent classifier, NER model and Action trainer may be retrained, depending on the correction type and scope."
+41,D.3 Chatbot session architecture,"
+Fig 4. Chatbot session architecture
+Fig 4 shows the architecture for a chatbot session as instantiated by the chatbot channels. 
+When a user session start, the chatbot channels will instantiate a session with the input processing controller which will orchestrate the input processing, client authentication (if required) and response / action execution through the middleware integrator.
+The input from the chatbot channels will first be pre-processed through the NLP model and the NER model for standardisation and entity extraction. 
+The processed input will then be passed to the intent recognition and action execution cluster. Based on the conversation tier, the context manager will record and provide prior tier’s details such as entities recognised, and intent identified for contextual conversations with the user. Should the intent be classified as a document query, the input and the document contents identified will be passed the document intelligence cluster.
+The document intelligence cluster will first encode the query and document contents before running through the machine comprehension model for response extraction.
+All database queries will be executed through the middleware integrator and all transactions will be recorded by the session controller. Event management (such as unfulfilled sessions being passed to the live agent) will be handled by the session controller as well.
+
+"
+42,D. AI Solution Approach,
+43,E. About Amaris.AI,"
+Amaris.AI is a curated full-stack artificial intelligence solutions provider based in Singapore. We believe in creating, developing and implementing artificial intelligence solutions that exceed business needs, with total focus, delivery excellence and unwavering commitment to our customers. Our solutions have been deployed in enterprise-level organisations based in asset management, telecommunications and other industries.
+Visit us at "
+44,parent,"
+
+
+Document Confidentiality
+The information contained herein is proprietary to Amaris.AI and may not be used, reproduced or disclosed to others except as specifically permitted in writing by Amaris AI Pte Ltd. It has been made available to  solely for an objective evaluation of Amaris.AI’s services, and such information may be disclosed only to those employees of , who have the need to know such information in order to perform the evaluation.
+Document Validity
+This Document is hereby owned by Amaris.AI and will remain valid and open for acceptance for the period of 90 days from the date of submission to .
+
+
+
+"
