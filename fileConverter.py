@@ -40,5 +40,9 @@ if __name__ == "__main__":
     parser.add_argument("-t", dest='fileType', default='docx',action="store", help='input file path')
     args = parser.parse_args()
     
+    print(args.filePath)
+    print(args.outFilePath)
+    print(args.fileType)
+    
     newPath=convertPDF(args.filePath, args.outFilePath, args.fileType)
     print('file converted and saved to %s'%(newPath))

@@ -17,9 +17,9 @@ This repository contains code base for Document Intelligence for pdf documents
 
 # (2) Extracting header / text pairs in a csv format
 
-     1) run "python docProcessor.py -f <input file path> -o <output file path>
+     1) run "python docProcessor.py -f <input file path> -o <output file dir>
      
-     the docx file at "input file path" will be processed and the output csv with header and text pairs will be saved at "output file path"
+     the docx file at "input file path" will be processed and the output csv with header and text pairs will be saved at "output file dir". The filename will be printed
 
 # (3) Getting a tree representation of the docx (json format)
     1) in your own script:
