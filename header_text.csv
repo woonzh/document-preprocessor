@@ -1,185 +1,1392 @@
 ,header,text
-0,A. Executive Summary,"
-Amaris AI is developing a virtual assistant (chatbot) for the purpose of replicating the services and responses expected of a human service staff. The virtual assistant could take the form of a backend engine providing conversational responses based on knowledge bases, backend databases or predefined answers. The chatbot has an application layer, if required, to facilitate the conversation sessions.
-This document states the scope, assumptions and design for the 3 phases of Telekom Malaysia’s virtual assistant (chatbot) implementation."
-1,B.1 Scope Inclusions,"
-Natural Language Processing for the purpose of:
-Language detection (English, Bahasa Malaysia, Chinese)
-Language interpretation (including selected short forms and jargons, to be collectively decided with Telekom Malaysia)
-Query response in detected language
-Natural Language Understanding which includes:
-Entity Extraction (Common entity types and industry / Telekom Malaysia exclusive entity groups and list)
-Context retention and utilization in subsequent conversation tiers
-Able to understand inputs with certain levels of inaccuracy such as grammatical errors, spelling errors, incomplete sentences etc. (Up to tolerable inaccuracy levels)
-Intent classification for inputs, including default fallback for unfulfilled / out of scope questions.
-Machine learning / recurrent learning 
-Recurrent learning / model correction based on user input interpretation or admin triggered re-tagging / correction
-Able to conduct retraining of classification / extraction models through the removal, insertion or correction of input parameters and subsequent retraining
-Able to self-learn from user selection for queries with close answers (intents with relatively similar probabilities)
-Chat Analytics
-Able to conduct data aggregation on various profiles such as user profile, conversation / intent profile, channel profiles
-Able to identify / assist in the identification of trends in conversations
-Provision of dashboard with filters and report exporting functionality
-Query prediction based on various parameters such as user profile, seasonality etc.
-Various analytics functions such as unfulfillment tracking, other business requirements.
-Will expose necessary API endpoints in the required formats (XML, JSON) and protocol (RESTful, SOAP)
-Will support the following browsers for the administrator module:
-IE version 8 and above
-Mozilla Firefox version 28 and above
-Google Chrome version 33 and above
-Safari Version 8 and above
-Support module for chatbot lifecycle activities
-Support speech recognition (speech to text) and text to speech
-Support for multiple conversation tier
-Able to pass chat session to agent based on user intent or specific conditions
-Administrator module for:
-Chatbot creation and training
-Conversation review, retagging and retraining.
-Chatbot configuration and deployment
-Simulation and testing module
-Analytics and reporting module 
-Relevant user access and activities logging"
-2,B.2 Scope Exclusions,"
-We will need additional clarifications / support for the following scopes
-Infrastructure setup, requirements and deployment
-Support for mobile browsers
-Tool for custom logic creation in task execution
-Tool to configure chatbot for special and adhoc events
-Integration with Telekom Malaysia Middleware"
-3,B. Understanding of Scope of Work,"
-The solution aims to provide a virtual assistant to power the chatbot channels currently used for user engagement. The virtual assistant is expected to interpret user intention, extract key entities and provide suitable responses based on the above conditions. The virtual assistant is also expected to convert user input into contextual queries for knowledge bases or backend databases. 
-The virtual assistant is also expected to have a administrator module for the management, training and deployment of the chatbot. User access control and logs will be based on Telekom Malaysia’s NetIQ system. "
-4,C.1 Assumptions,"
-Telekom Malaysia will be providing the following information:
-List of special entity types and the corresponding entity list
-List of technical jargons and common short forms
-Expected data retention period
-Infrastructure setup at Telekom Malaysia’s desired server / cloud host will be conducted by Tech Mahindra
-Telekom Malaysia will advise on the desired analytics areas and insights, including but not limited to:
-Areas of interest in consumer aggregated analytics such as trends based on selected profile parameters etc.
-Customer profiling parameters
-Basis of sentiment classification
-Areas of user engagement to monitor / improve
-Interested parameters or areas for user query prediction
-Telekom Malaysia will advise on desired reports, fields etc.
-Telekom Malaysia will advise on expected API exposure other than those essential for stated chatbot functionalities
-Telekom Malaysia will advise on expected user experience in specific modules, if there is. Else in-depth requirements gathering and conceptualization will be done at a later date."
-5,C.2 Dependencies,"
-Connectivity and access to Telekom Malaysia’s channels / systems / infrastructure for integration development, testing and production deployment
-Efficiency in the provision of data / information / access by Telekom Malaysia
+0,Summary,"
+The purpose of this work instruction is to provide a user operating guide to the Pattern Manager application used by Customer Service Delivery Service Outage Management (SOM) to identify potential outages from related fault patterns.
+"
+1,Purpose,"
+The purpose of this work instruction is to provide a user operating guide to the Pattern Manager application used by Customer Service Delivery Service Outage Management (SOM) to identify potential outages from related customer fault patterns."
+2,Scope,"
+This document is a system user guide for Pattern Manager 6.0.
+It describes and explains the features, screen elements, field values, and patterning and display rules and provides instructions on login, navigation, support and using the various functions.
+This document does not directly cover the business processes used by SOM consultants to monitor, analyse or action related fault patterns as part of outage management. 
+
+For details of these procedures refer to work instructions  Outage Identification & Setup and  Pattern Manager – Identification & Actioning of Related Fault Patterns."
+3,Broadband CAN Patterner 2.0,"
+Identifies related broadband fault patterns on CAN copper cable elements e.g. Pillar
+
+Faults can appear in more than one Patterner. For example, a fault with both common Switching and CAN elements may appear in both CAN and Switch Patterners (e.g. When it is “fed” by both the same pillar and is in the same AXE Exchange Magazine). In these cases, an active hyperlink will allow the user to toggle between the 2 patterns or view them side by side. Faults with common PGS and CAN elements will also be hyperlinked. This facilitates analysis of the true underlying common network element.
+
+Related fault patterns formed and displayed in Pattern Manager are indications of potential outage only and must be investigated and analysed by SOM Complex Consultants, using a range of other systems and tools, e.g. SULTAN, NPAMS, GDD, CASINO, etc. and/or by consulting with CT’s or other technical workgroups before a final determination and scope of an outage can be confirmed."
+4,Switch Patterner 6.0,"
+Identifies related fault patterns on Exchange Switches e.g. AXE or S12"
+5,PGS Patterner 6.0,"
+Identifies related fault patterns on Pair Gain Systems e.g. RIM or RAM 8"
+6,CAN Patterner 6.0,"
+Identifies related fault patterns on CAN copper cable elements e.g. main cable"
+7,Overview of Pattern Manager 6.0,"
+Pattern Manager 6.0 is a web based application which interfaces with SIIAM.
+
+Pattern Manager (PM) is used to identify related fault patterns with a common network element which may indicate an outage.
+
+An outage is any significant disruption to the network affecting multiple services and with a single or related technical cause.
+
+PM gathers SIIAM data for customer fault reports which meet certain criteria – e.g. specific FNN types, symptom codes and plant types and which are within a 72 hour reporting window - and then applies patterning rules to identify common network elements e.g. customer faults having the same Pillar or same Pair Gain System. 
+
+Patterned faults are stored until certain display criteria are met and then are displayed in a Graphical User Interface (GUI) screen as colour-differentiated groups along with key information to facilitate pattern analysis by SOM consultants. (Refer Figure 1)
+
+Faults (new and existing) are re-analysed every 10 minutes.
+
+A Check code field allows the user to mark off patterns with the determination made/action taken.
+
+A SOM Administrator option allows SOM managers and complex consultants to adjust fault pattern display thresholds and to make some other basic changes (e.g. to add or remove symptom and/or check-off codes) in response to operational requirements.
+There are 4 different fault Patterners within the Pattern Manager application:
+"
+8,Overview of major upgrade 2016,"
+In November 2016 a major upgrade of Pattern Manager occurred to introduce the following enhancements:
+
+Transition TADA Pattern Manager to a shared java-script web-GUI along with NODS
+Implement Priority Patterning of rapid forming and large fault patterns
+Implement automatic NODS creation from Priority Patterns
+Implement manual creation of NODS direct from within Pattern Manager
+Improve fault patterning and display by adding additional functions:
+Gateway in all Patterners
+Exchange in Switch Patterner
+Full network address for AXE and System 12 Switches
+‘Update All’ capability
+Update User Management to align with current business roles and security requirements.
+
+In parallel with the NODS/Pattern Manager Enhancement, the newly developed Mozart CONEN to NODS solution on the PUMA platform developed by Telstra Service Ops (TSO) Network Automations enables NODS to be created automatically from CONEN notifications raised by Service Assurance Ops (SAO) for network incidents (i.e. unplanned outages affecting core network)."
+9,Read-only PM,"
+Typically GOC consultants
+Able to view Pattern Manager only (i.e. Read-only)
+NOTE: This profile does NOT include access to NODS"
+10,Read/Write NODS,"
+Typically SOM Partner agents
+Able to create NODS; able to update, cease user & interface created NODS
+NOTE: This profile does NOT include access to Pattern Manager
+"
+11,Read/Write NODS-PM,"
+Typically SOM Simplex Consultants & CNSC Data and Afterhours Testers
+Able to create NODS; able to update, cease user & interface created NODS
+Able to view and update Pattern Manager
+"
+12,Super User NODS-PM,"
+Typically SOM Complex Consultants
+Able to create NODS; able to update, cease user & interface created NODS
+Able to view and update Pattern Manager
+Able to access and change Pattern Manager Configuration settings
+"
+13,Level 2 NODS-PM,"
+Systems Security and Access only
+Access to user management functions only
+"
+14,Level 3 NODS-PM,"
+System developers and IT support only
+Access to all functions
+"
+15,User Profiles,"
+There are 5 User Profiles or Access Levels available in the combined NODS-Pattern Manager web application:"
+16,Get Access to Pattern Manager,"
+Pattern Manager is now bundled with NODS. New Access or changes to existing access level to NODS-Pattern Manager web-application is by online request via the Telstra Intranet.
+The stand-alone Read-Only Pattern Manager access level must also be requested via the NODS New access form.
+Service Desk Online
+Software Applications
+NODS – National Outage Database System
+Then select either:
+NODS New Access
+To apply for new access to NODS-Pattern Manager application
+
+NODS/Modify/Delete
+To modify access level or delete access to NODS-Pattern Manager application
+
+NODS Password Reset
+For NODS-Pattern Manager application password reset
+
+NODS Fault
+For faults with the NODS-Pattern Manager application (e.g. unable to log in, slow response, etc.)
+New or changed access requests will need to specify the required access level according to the user’s business role (refer section 7) and will require the approval of the user’s one up manager.
+
+NOTE: The previous generic logins for Read-only access to Pattern Manager are no longer available. Users requiring Read-only access to Pattern Manager must apply for an individual Account-01 login and password via MyIT as above."
+17,Log in to NODS-PM,"
+Pattern Manager is bundled with NODS in the NODS-Pattern Manager Web UI.
+To Log into NODS-Pattern Manager web application follow these steps:
+Click on the URL 
+At the Log In screen enter your Telstra account-01 User ID & password (‘LAN Log in’)
+Click Submit button
+The Welcome to NODS Home Menu screen displays
 
 "
-6,C. General Assumptions,
-7,D.1.1.1 Chatbot training and evaluation module,"
-This module will provide the user interface to create, update and train the chatbot. The administrator will be able to conduct activities such as intent training, entity labelling, action definition, document upload etc. 
-The administrator will also be able to review conversation history and the corresponding classification, replies and actions. Erroneous tagging, extraction or classification can be corrected in this module."
-8,D.1.1.2 Simulation and testing module,"
-This module will provide the user interface to simulate client conversations with the various versions of the chatbot before / after deployment. The administrator will be able to review the model output parameters, classification and the respective values such as probability etc."
-9,D.1.1.3 Chatbot deployment and management module,"
-This module will provide the user interface for chatbot version and status control as well as the deployment across various integration channels. Chatbot utilisation statistics will be available as well for convenient review and management."
-10,D.1.1.4 Access and activities management module,"
-This module will provide the user interface to review and manage user access to the administrator portal and the actions conducted during the login session. Access rights can also be managed or issued as well."
-11,D.1.1.5 Monitoring and reporting module,"
-This module will provide the chat and channel analytics and reports as requested. Users will be able to query specific parameters and export the report with certain data filters. User profiles will be retrievable here as well."
-12,D.1.1 Application Layer,"
-The application layer will provide the user interface for access to the chatbot’s administrator functions. It will communicate with the logic and connectivity layer for various purposes such as model training, testing and deployment."
-13,D.1.2.1 Model training controller,"
-The model training controller will interface between the application layer (chatbot training and evaluation module), model layer and database layer for the purpose of model training / retraining. Based on the signals from the application layer, the controller will orchestrate the document processing upon knowledge base ingestion, intent classifier training, entity extractor training etc."
-14,D.1.2.2 Input processing controller,"
-The query processing controller will interface with the application layer (simulation and testing module) or the chatbot channels integrator to receive signals for testing purposes or client queries respectively.
-The controller will interface with the session controller for conversation tier management and logging purposes.
-The controller will also interface with the model layer and database later to orchestrate the intent classification, action execution or machine comprehension as required. "
-15,D.1.2.3 Chatbot channels integrator,"
-The channel integrator will interface with the interaction channels such as the live chat platforms and social media platforms.
-We will need Tech Mahindra’s help on this."
-16,D.1.2.4 Middleware & DB integrator,"
-The middleware integrator will interface with Telekom Malaysia’s backend systems such as Oracle SOA suite, Tibco and MuleSoft.
-We will need Tech Mahindra’s help on this."
-17,D.1.2.5 Monitoring and reporting controller,"
-The monitoring and reporting controller will monitor, and aggregate chat analytics required such as channel statistics, intent statistics, fulfilment statistics, user profiles etc. The controller will coordinate the ETL process, analytics and the reports generation / scheduling."
-18,D.1.2.6 Session controller,"
-The session controller will manage the conversation tiers for each chatbot session for context management, access control management and session logging as required.
-User profile extraction for intent prediction / suggestion will be managed by the controller as well"
-19,D.1.2.7 Access management integrator,"
-The access management integrator will interface with Telekom Malaysia’s ID Management System for user information retrieval for access control and logging as required.
-Tech Mahindra will provide the necessary end points and authentication methods for the above interface."
-20,D.1.2 Logic Layer,
-21,D.1.3.1 NER layer,"
-The Named Entity Recognition (NER) layer will identify and classify specific entities from the queries or the knowledge base as required. The NER layer will be trained on commonly known entities such as places, names etc. but can be expanded to include technical jargons or common short forms etc. We will need Telekom Malaysia provision on the additional entity types, corresponding list and technical jargons."
-22,D.1.3.2 NLP layer,"
-The Natural Language Processing (NLP) layer will conduct pre-processing on the queries or the knowledge base as required. The cleaning, normalisation etc. is important for higher intent classification accuracy."
-23,D.1.3.3 Action trainer,"
-The action trainer or executor will handle complex actions following the intent classification and entity extraction which may require defined database queries or execution."
-24,D.1.3.4 Intent classification model,"
-The intent classification model will work on the processed text to interpret and classify the intent behind the query. It is also used as one of the layers in the knowledge base ingestion and processing as well."
-25,D.1.3.5 Context manager,"
-The context manager will provide additional representation to the query processing layers such as intent classification, action trainer etc. It is important for contextual awareness across multiple conversation tiers in a single session."
-26,D.1.3.6 Language Classifier model,"
-The language classifier model will conduct classification on a specific text corpus based on a pre-defined set of languages. The classification will be done in batches to allow for identification of multiple languages in a corpus. Documents will multiple languages will be segmented as well."
-27,D.1.3.7 Document decoder,"
-The document decoder will primarily classify the document into 2 categories (images based and text-based document). "
-28,D.1.3.8 Object detection model,"
-The object detection model is needed for non-text-based documents during the knowledge base ingestion. Object types include graphics, text, tables etc. Object detection is essential, and the processing needed for each type will be different. This model will identify and classify the various objects within the knowledge base"
-29,D.1.3.9 OCR model,"
-The Optical Character recognition model is needed for non-text-based documents during the knowledge base ingestion. The model will convert images to text-based characters based on the selected language."
-30,D.1.3.10 Data reconstruction model,"
-The data reconstruction model will ingest the annotated datasets for specific segments of the documents. Based on the data type (images, table, text etc.), the model will reconstruct the dataset to a human readable format, preserving the original presentation as much as possible."
-31,D.1.3.11 Document processer,"
-The document processer will be used for text-based documents during the knowledge base ingestion. The processor will conduct clustering and annotation for the information / text within the document for subsequent processing."
-32,D.1.3.12 Language representation model,"
-The language representation model will generate semantic representations for text in the knowledge base ingested. Extracted / converted text will be broken down into tokens and passed through the model for contextually aware representations / embeddings."
-33,D.1.3.13 Machine comprehension model,"
-The machine comprehension model will extract the answer to a query from a specified text corpus. The model will be built upon the output of the language representation model for contextually aware response. "
-34,D.1.3 Model layer,
-35,D.1.4.1 Knowledge base,"
-The knowledge base layer will store the weights for the various layers in each model. These weights will be retrieved during input processing for various purposes such as intent classification, NER machine comprehension etc.
-The knowledge base layer will also store the embeddings for the documents ingested during admin training as well. Each document may have multiple embeddings depending on which models are needed for interpretation and prediction. "
-36,D.1.4.2 Documents database,"
-The documents database will be a file storage system to store the pre-processed and processed documents as uploaded by the admin for document processing."
-37,D.1.4.3 Session and access logs,"
-The session and access logs database will record user access details and the transactions made during the session. "
-38,D.1.4 Database layer,
-39,D.1 System design,"
-Fig 1 System design (overview)"
-40,D.2 Document ingestion and chatbot training,"
-Fig 2. Document Ingestion architecture
-Fig 2 shows the architecture for document processing which includes FAQs, user manuals etc. 
-Documents uploaded through the application layer (Chatbot training and evaluation module) will be passed to the model training controller which will orchestrate the model utilisation / re training as required. 
-Based on the document type (image / text based) as identified by the document decoder, the controller will either pass it to the image processing cluster or direct to the document comprehension cluster.
-The image processing cluster seeks to identify, extract and convert segments of the image-based document into annotated datasets for the document comprehension cluster to digest. Object types include images, tables, text etc.
-The document comprehension cluster seeks to first segment the document into meaningful header and content groups for an efficient filtration model. Subsequently, the groups are encoded into semantically meaningful representations, based on the language detected, which will be used as a base for the comprehension model. 
-All weights, documents and encoded representations will then be stored into the database layer for application use.
-For recurrent learning purposes, the intent classifier will be retrained to be directed at the new document section. The machine comprehension model will be retrained if the answer span has been corrected.
-Fig 3. Chatbot Training architecture
-Fig 3 shows the architecture for other areas of chatbot training which includes NER, intent classification and action definition. 
-Based on the inputs from the application layer, the model training controller will orchestrate the model utilisation / re training as required. 
-The pre-trained layer will provide text pre-processing for the generalisation and cleaning of the training questions, context management and language identification. It will be called upon first by the controller.
-The NER model will be trained upon admin defined entity sets and location within sentences / questions. NER will be utilised for entity extraction which will be used to populate specific action fields (database query fields etc.)
-The intent classification model will be trained upon processed question list through statistical and semantic methods to provide contextually aware models with language understanding. 
-Finally, the action trainer will integrate with the NER to populate admin defined queries with the extracted entities. The trainer will also integrate with the middleware integrator to execute the queries.
-For recurrent learning purposes, the intent classifier, NER model and Action trainer may be retrained, depending on the correction type and scope."
-41,D.3 Chatbot session architecture,"
-Fig 4. Chatbot session architecture
-Fig 4 shows the architecture for a chatbot session as instantiated by the chatbot channels. 
-When a user session start, the chatbot channels will instantiate a session with the input processing controller which will orchestrate the input processing, client authentication (if required) and response / action execution through the middleware integrator.
-The input from the chatbot channels will first be pre-processed through the NLP model and the NER model for standardisation and entity extraction. 
-The processed input will then be passed to the intent recognition and action execution cluster. Based on the conversation tier, the context manager will record and provide prior tier’s details such as entities recognised, and intent identified for contextual conversations with the user. Should the intent be classified as a document query, the input and the document contents identified will be passed the document intelligence cluster.
-The document intelligence cluster will first encode the query and document contents before running through the machine comprehension model for response extraction.
-All database queries will be executed through the middleware integrator and all transactions will be recorded by the session controller. Event management (such as unfulfilled sessions being passed to the live agent) will be handled by the session controller as well.
+18, Home Menu Screen,"
+Depending on user Access level, the following menu items may be available as hyperlinks to access required NODS and Pattern Manager functions:
+Active Outage Search
+Archive Outage Search
+Create Outage
+Admin Menu
+Pattern Manager
+NOTE: User Admin option is only visible to and accessible by L2 Access and L3 System Admin. Other users will see a blank space.
+NOTE: Read-only users of Pattern Manager will only see and only have access to the Pattern Manager option on the Home Screen. All other options will be blanked out.
+"
+19,Basic Navigation,"
+Navigation within web NODS-PM is very simple:
+Click the required menu hyperlink to access that option
+Click Home hyperlink at top left at any time to return to the Home menu
+Click Logout in top right corner to log out of NODS Pattern Manager web application
+Click the browser back arrow to view the previous screen"
+20,Log into Pattern Manager,"
+At the NODS-PM Home menu, click Pattern Manager link.
+Pattern Manager Home menu screen will display which provides access to the 4 Patterners and to other Pattern Manager functions. Refer Section 6.5 for more detail."
+21,Pattern Manager Admin Version 2.0 ,"
+Click to view & modify fault patterner configuration settings"
+22,Priority Outage Dashboard,"
+Click to view & analyse Priority fault patterns & auto-created NODS"
+23,Broadband CAN Patterner Version 2.0,"
+Click to view & analyse related broadband fault patterns on CAN cables"
+24,Switch Patterner Version 6.0,"
+Click to view & analyse related fault patterns on Exchange Switches"
+25,PGS Patterner Version 6.0,"
+Click to view & analyse related fault patterns on PGS
+"
+26,CAN Patterner Version 6.0,"
+Click to view & analyse related fault patterns on CAN cables
+"
+27,Pattern Manager Home Menu screen,"
+The Pattern Manager Home screen contains a menu of 6 hyperlinked options used to access all the functions of Pattern Manager:"
+28,Pattern Manager Navigation,"
+Basic navigation methods within Pattern Manager are the same as those for the NODS-Pattern manager application in general. Refer section 6.3 above.
+Some specific navigation options within various Pattern Manager screens will be described within the each relevant section later on in this document.
+When users are on any Pattern Manager screen a ‘Pattern Manager Home’ link will always be available at the top centre of the screen to enable quick navigation back to the main Pattern Manager Home menu. 
+Users can also click the Home link to go right back to the main NODS-PM menu screen.
 
 "
-42,D. AI Solution Approach,
-43,E. About Amaris.AI,"
-Amaris.AI is a curated full-stack artificial intelligence solutions provider based in Singapore. We believe in creating, developing and implementing artificial intelligence solutions that exceed business needs, with total focus, delivery excellence and unwavering commitment to our customers. Our solutions have been deployed in enterprise-level organisations based in asset management, telecommunications and other industries.
-Visit us at "
-44,parent,"
-
-
-Document Confidentiality
-The information contained herein is proprietary to Amaris.AI and may not be used, reproduced or disclosed to others except as specifically permitted in writing by Amaris AI Pte Ltd. It has been made available to  solely for an objective evaluation of Amaris.AI’s services, and such information may be disclosed only to those employees of , who have the need to know such information in order to perform the evaluation.
-Document Validity
-This Document is hereby owned by Amaris.AI and will remain valid and open for acceptance for the period of 90 days from the date of submission to .
-
-
+29,Login & Navigation,"
+The following sections describe how to login and navigate to the main NODS-Pattern Manager UI and in the dedicated Pattern Manager application.
+"
+30,Access the required region by clicking the Region name link,"
+Regions are state-based with metro and country areas of the same state grouped together
+Regions are listed geographically North to South; East to West
 
 "
+31,Determine the region requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults
+"
+32,Quickly assess the relative volumes of patterned faults per region,"
+MO = Mode of Operations – the number of faults which must meet patterning criteria before a fault pattern will display in that region
+TOT = total number of patterned faults per region
+NEW = number of patterned faults in region not yet analysed and actioned
+% = percentage of patterned faults in region not yet analysed and actioned"
+33,Select Region,"
+When the CAN Patterner Version 6.0 link is clicked, the CAN Patterner Region Dashboard will open displaying the various geographical regions of the PSTN network and the number of patterned faults in each.
+The Region Dashboard allows a user to:"
+34,Access the required exchange by clicking the Region name link,"
+Regions are listed alphabetically"
+35,Determine the exchange requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults"
+36,Quickly assess the relative volumes of patterned faults per exchange,"
+tot = total number of patterned faults per exchange
+new = number of patterned faults in exchange not yet analysed and actioned
+Above the exchange list are displayed:
+Region name
+‘Printable’ link providing plain text view of region
+Last refresh date
+% faults unchecked in region
+Below the exchange list are displayed:
+Total faults in region
+Number unchecked faults in region"
+37,Select Exchange,"
+When a Region link is clicked, the CAN Patterner Exchange List will open displaying the various exchanges which contain fault patterns and the number of patterned faults in each.
+To the right of the Exchange List a version history gives details of the changes introduced in each successive version of Pattern Manager.
+The Exchange List allows a user to:"
+38,CAN Exchange screen,"
+When an Exchange is clicked, the Exchange screen will present, displaying any related fault patterns present in the exchange along with key information to assist with initial analysis.
+Exchange List remains visible at left to allow quick selection of the next exchange.
+The main section of the screen displays basic details of customer faults reports which meet CAN patterning criteria (see next section 8.4).
+The following details are displayed from left to right in the middle section of the screen
+HP Hyperlinks – if the fault also appears in a fault pattern in another Patterner (e.g. PGS) the hyperlink letter will be bold and underlined:
+P (PGS) – S (Switch) – B (BB CAN)
+
+Faulty FNN (Full National Number)
+Date & Time of fault report
+Fault Symptom code (e.g. NTN – No Tone)
+CAN Network Elements
+Main cable/mpair – Cabinet/bpair – Gateway/opair – Pillar/opair – Control Joints/opair
+Only the first 2 Control Joints from the exchange end are displayed
+If a Network Element column is blank, that type of network element is not present in that FNN’s service
+NOTE: to simplify the display and make analysis easier, only CAN network elements are displayed in CAN Patterner. To see Pair Gain Systems or Switch devices present in a service or pattern it is necessary to use the hyperlinks (if active) or consult Shazbot or NPAMS.
+‘X’ – Service Type as recorded in NPAMS e.g. XR = ADSL service – SS = PSTN service (see table section 14.6)
+NODS ID
+If a NODS has been created automatically by Priority Patterner or manually from within CAN Patterner, the NODS ID will display here
+NODS manually created in native NODS will NOT display
+NODS auto-created by Mozart or other external interfaces will NOT display
+
+User ID of the user who has Checked off the fault pattern
+Check List (‘Chk_lst’) indicating determination made/action taken on fault pattern e.g. CVH – Confirmed Volume Hold – NYV – Not Yet Volume Hold (refer table section 14.8) "
+39,Form CAN fault pattern,"
+A related fault pattern will form in the background in CAN Patterner whenever:
+2 or more SIIAM customer trouble reports meet the following criteria:
+Symptom code is one of: CBO, CTK, EXO, ICP, NSF, NSY, NTN, NWO, OGP, PLR, SSI, SSS, TSM, UCC, ULI, ULL, VMT, CCO, COS, DTP, DTI, DTG, DTD, DTH, and…
+Faults are in the same Exchange Service Area (ESA)	and…
+Faults are in the same Pillar	or…
+Where there is no pillar, in the same Control Joint (closest to the exchange)	or…
+Where there is no Pillar or Control Joint, in the same Gateway
+Where there is no Gateway, in the same Cabinet	or…
+Where there is no Pillar, Control joint, Gateway or Cabinet, in the same Main Cable	and…
+The O, branch or main pair is within 30 pairs of the lowest pair in the pattern
+Fault pattern will be retained for 72 hours from fault report date or for the timeframe configured by SOM in the ‘Update Age of Pattern Data’ table of Pattern Manager Admin 2.0
+Only the valid Symptom Code and Age of Pattern Data timeframe rules can be changed by SOM. Changes can only be made by a user with NODS-PM Super User Access Level via the Pattern Manager Admin function. All other rules are hard coded into Pattern Manager.
+NOTE: ADSL Symptom codes for connectivity issues most indicative of exchange line problems have been added to the normal exchange line symptom code list."
+40,Display CAN fault pattern,"
+While a basic CAN fault pattern will ALWAYS form in the background of CAN Patterner, fault patterns will only become visible in an Exchange screen in CAN Patterner when the following criteria are met:
+The above patterning rules have been met and patterns have formed in the background
+The number of patterned faults is equal to or greater than the patterning threshold configured by SOM in the Update Patterning Threshold’ table of Pattern Manager Admin 2.0
+For example, when the Threshold Setting is set to ‘5’ a fault pattern will only display when there are 5 patterned faults in the same exchange and the same pillar, etc.
+Faults so displayed can be in the one 30 pair grouping or in a combination of 30 pair patterns 
+
+e.g. If the Threshold was set to 5 then the rule would be met if there were:
+5 faults in one 30 pair group
+E.g.  P5 – pairs 3 + 9 +10 +18 +25
+2 faults in one 30 pair group plus 3 faults in another 30 pair group or “2+3”:
+E.g.  P5 – pairs 3 + 9 plus 74 + 87 + 91 
+2 faults in one 30 pair group plus 2 faults in another plus 2 faults in another or “2+2+2”:
+E.g.  P5 – pairs 3 + 9 plus 51 + 56 plus 89+ 97
+Each 30 pair grouping is distinguished by a band of different background colour
+Only the 2 Control Joints (CJ) closest to the exchange are displayed
+CJ faults are only patterned on the CJ closest to the exchange. CJ 2 is display only"
+41,DummyFNN cases,"
+CAN Patterner will also display any Plant & Equipment cases with a symptom code of UCC (Underground Cable Cut) whenever the exchange in which the fault occurs also has a valid displayed fault pattern
+Plant & Equipment cases with a Symptom code of UCC are created whenever a damage is reported to an underground cable.
+E.g. a UCC damage case is reported in an exchange but the current threshold for displaying fault patterns (5) has not yet been met – the DummyFNN case does not display. However, when a fault pattern meets the display criteria and appears in the exchange, so too will the UCC DummyFNN case
+Damage related P&E cases have an FNN formed from the text ‘DummyFNN’ and the Case number e.g. ‘DummyFNN131234567’. In CAN Patterner this FNN will appear shortened by replacing the ‘DummyFNN’ with an asterisk e.g. ‘*131234567’
+The details of DummyFNN faults must be investigated in SIIAM to determine whether or not they are related to the fault pattern in the exchange."
+42,Faults with no cable details,"
+CAN Patterner will also display any faults which have no cable details whenever the exchange in which the fault occurs also has a valid displayed fault pattern
+E.g. a case with no cable details is reported in an exchange but the current threshold for displaying fault patterns (5) has not yet been met – the no cable details case does not display. However, when a fault pattern meets the display criteria and appears in the exchange, so too will case with no cable details
+Faults with no cable details may have ANY Symptom code.
+Faults with no cable details generally occur for one of 5 main reasons:
+A fault has been created for a service which is working over copper network which has now been asset transferred to Nbnco (known as ‘Continuity’ or CSLL services)
+A fault has been created for a data line where the cable details have not been available from NPAMS to populate the Cable Details tab
+A fault has been created for the exchange or auxiliary line of an ISDN service
+A fault has been created to log a fault on multiple services for a business
+An error has occurred during case creation
+The details of DummyFNN faults must be investigated in SIIAM to determine whether or not they are related to the fault pattern in the exchange."
+43,Control Joints,"
+Only the first CJ closest to the exchange will be used for patterning
+Only the first 2 CJs closest to the exchange will be visible 
+Any subsequent CJs in the cable route will be ignored for patterning and will not be visible on the screen"
+44,Pair Gain Systems,"
+To simplify the display, PGS will not appear in CAN patterner network elements even when present in the service
+If the FNN is also in a PGS pattern, the P (PGS) hyperlink will be active
+The presence of PGS can also be suspected by the following evidence:
+Access Large PGS = absence of main cable (although services fed by ‘secondary’ or ‘out of area’ PGS may have main cables and pairs)
+CAN Electronic Small PGS = presence of CJ (although straight lines can also run through CJs)
+ADSL DSLAM = ‘x’ service type is XR or XS"
+45,Special CAN patterning and display rules,"
+In addition to the above basic CAN patterning and display rules there are some special rules:"
+46,CAN Fault Patterning Rules,"
+In CAN Patterner there are separate rules for:
+Forming a pattern of faults
+Displaying a pattern of faults
+Special CAN Patterning & Display Rules"
+47,Analyse CAN Fault Pattern,"
+A related fault pattern in CAN Patterner is only an indication of a potential outage. To confirm the presence of an outage to a single network element having caused all the faults in the pattern, further detailed investigation and analysis must be conducted by SOM Complex Consultants using both the information in Pattern Manager itself and in external systems.
+The below sequence describes the basic general approach: 
+Investigate fault and network detail within the CAN pattern e.g. fault report times, symptom codes and contiguity of affected pairs
+Use hyperlinks to compare fault and network detail in other Patterners e.g. which fault pattern gives the clearer and more compelling evidence
+Investigate individual customer and fault details of each FNN in pattern, e.g. SIIAM case details, history and notes
+Run a SIIAM query to identify any related faults which did not meet patterning display criteria
+Investigate customer type and address patterns and pair occupancy of range in CASINO (Clarification of Affected Services in Network Outage) tool or NPAMS
+Check cable location and route and relative location of faults using GDD (Graphical Data Display) network maps
+Test services in SULTAN particularly when there is an apparent gap in the affected range (“testing within the range”)
+Ring CT’s or Team leaders for more information"
+48,Create NODS from CAN Patterner,"
+If an outage has been confirmed on a CAN network element included in the fault pattern, create a NODS notification directly from within CAN Patterner using the ‘Create NODS’ button.
+This provides the quickest response to the outage and ensures that FOH consultants and customers will be advised of the outage at the earliest opportunity.
+Follow these basic steps:
+Select the affected network element e.g. Main Cable or Pillar ID using the Network Element selection field
+Enter the affected pair range in the Pair Selection field e.g. 1-50
+Click the ‘Create NODS’ button
+After a brief pause the NODS ID that has been created will display in the NODs ID column
+The NODS can be opened directly using this link, allowing changes to be made (e.g. adding Parent case and CONEN IDs)
+
+NOTE: Round out to the actual pair range of the affected cable as determined by investigation of CASINO, NPAMS and/or GDD e.g. a pattern in comprising related faults on a common Pillar P5 between 7 and 46 would typically be rounded out to the standard size of a 50 pair cable (pairs 1-50) once further investigation (e.g. in SIIAM and SULTAN) had confirmed that there were no faults beyond pair 50.
+Refer also Section 14.5"
+49,NOTE: Users with a PM Read-only Access Level can view the Check off code that has been applied by SOM but are unable to add or change Check off codes.,"
+For detailed instructions on the above, refer section 14.7
+For a table of valid check off codes and their meanings refer to section 14.8
+
+"
+50,Check off CAN Fault Pattern,"
+Once the pattern has been analysed and a determination made as to the findings and the action to be taken, each fault in the pattern must be ‘checked off’ to indicate this finding/action e.g. CVH = Confirmed Volume Hold or NYV = Not Yet Volume Hold.
+Initially, when first appearing, faults in a pattern will display the SIIAM case status of the fault when it first met Pattern Manager criteria e.g. Test-Pending or Field-Open.
+There are 3 methods of applying a check-off code:
+Apply a common code to all faults in the Exchange using the Update All function
+Apply a common code to selected faults in the Exchange using the selection boxes
+Apply a single code to each individual fault using the individual drop down lists
+To apply a check off action code to each fault in the pattern follow these basic steps:
+Choose the most appropriate Check off method from the above e.g. if all faults in the exchange are part of the one outage use Method 1
+Apply the correct code
+Click the Update or Update All buttons to save the code and update the exchange display and the totals in the Exchange list and Region Dashboard"
+51,CAN Patterner Version 6.0,"
+CAN Patterner 6.0 forms and displays fault patterns related by a common CAN copper cable network element e.g. main cable, cabinet, gateway, pillar or control joint.
+Click the CAN Patterner Version 6.0 link from the Pattern Manager home screen to access CAN Patterner."
+52,Access the required region by clicking the Region name link,"
+Regions are state-based with metro and country areas of the same state grouped together
+Regions are listed geographically North to South; East to West
+
+"
+53,Determine the region requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults
+"
+54,Quickly assess the relative volumes of patterned faults per region,"
+MO = Mode of Operations – the number of faults which must meet patterning criteria before a fault pattern will display in that region
+TOT = total number of patterned faults per region
+NEW = number of patterned faults in region not yet analysed and actioned
+% = percentage of patterned faults in region not yet analysed and actioned"
+55,Select Region,"
+When the PGS Patterner Version 6.0 link is clicked, the PGS Patterner Region Dashboard will open displaying the various geographical regions of the PSTN network and the number of patterned faults in each.
+The Region Dashboard allows a user to:"
+56,Access the required exchange by clicking the Region name link,"
+Regions are listed alphabetically"
+57,Determine the exchange requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults"
+58,Quickly assess the relative volumes of patterned faults per exchange,"
+tot = total number of patterned faults per exchange
+new = number of patterned faults in exchange not yet analysed and actioned
+Above the exchange list are displayed:
+Region name
+‘Printable’ link providing plain text view of region
+Last refresh date
+% faults unchecked in region
+Below the exchange list are displayed:
+Total faults in region
+Number unchecked faults in region"
+59,Select Exchange,"
+When a Region link is clicked, the PGS Patterner Exchange List will open displaying the various exchanges which contain fault patterns and the number of patterned faults in each.
+To the right of the Exchange List a version history gives details of the changes introduced in each successive version of Pattern Manager.
+The Exchange List allows a user to:"
+60,NOTE:,"
+The left hand PGS columns display details for Access Core Large PGS e.g. CMUX, RIM, RCM, DCS20 and SSNMUX
+The right hand PGS columns display details for CAN Electronic Small PGS e.g. 2/4 DPGS, RAM 8, 6/15-16, 16/96, SCaDS
+ADSL DSLAM PGS do not display in PGS patterner – they display in BB CAN Patterner."
+61,PGS Exchange screen,"
+When an Exchange is clicked, the Exchange screen will present, displaying any related fault patterns present in the exchange along with key information to assist with initial analysis.
+Exchange List remains visible at left to allow quick section of the next exchange.
+The main section of the screen displays basic details of customer faults reports which meet PGS patterning criteria (see next section 9.4).
+The following details are displayed from left to right in the middle section of the screen
+HP Hyperlinks – if the fault also appears in a fault pattern in another Patterner (e.g. PGS) the hyperlink letter will be bold and underlined:
+C (CAN) – S (Switch) – B (BB CAN)
+
+Faulty FNN (Full National Number)
+Date & Time of fault report
+Fault Symptom code (e.g. NTN – No Tone)
+PGS & basic CAN Network Elements
+Access Core large PGS ID – Type – P/S/C (Panel/Slot/Channel) e.g. CMUX or RIM
+Main cable/mpair – Cabinet/bpair – Gateway/opair – Pillar/opair
+CAN Electronic small PGS ID – Type – P/S/C e.g. 6/16 or RAM 8
+If a Network Element column is blank, that type of network element is not present in that FNNs service
+NOTE: to simplify the display and make analysis easier, only Access and CAN Electronic PGS and basic CAN network elements are displayed in PGS Patterner. To see other CAN or Switch devices present in a service or pattern it is necessary to use the hyperlinks (if active) or consult Shazbot or NPAMS.
+‘X’ – Service Type as recorded in NPAMS e.g. XR = ADSL service – SS = PSTN service (see table section 14.6)
+NODS ID
+If a NODS has been created automatically by Priority Patterner or manually from within CAN Patterner, the NODS ID will display here
+NODS manually created in native NODS will NOT display
+NODS auto-created by Mozart or other external interfaces will NOT display
+
+User ID of the user who has Checked off the fault pattern
+Check List (‘Chk_Lst’) indicating determination made/action taken on fault pattern e.g. CVH – Confirmed Volume Hold – NYV – Not Yet Volume Hold (refer table section 14.8) "
+62,Form PGS fault pattern,"
+A related fault pattern will form in the background in PGS Patterner whenever:
+2 or more SIIAM customer trouble reports meet the following criteria:
+Symptom code is one of: CBL, CBO, CCO, CEF, COS, CTK, EXO, ICP, NSF, NSY, NTN, NWO, OGP, TSM, UCC, VMT, DTP, DTD, DTG, DTI,	and…
+Faults have a PGS type of:
+Access Core (CMUX, SSNMUX, RIM, RCM or DCS20) 	and/or…
+CAN Electronic (1+4W, 2DPGS, 4DPGS, RAM8 Ph1, RAM8 Ph2, RAM8V90, MLC 6/15, 6/16, 16/96 or SCADS)	and…
+Faults are in the same ESA	and…
+Faults are in the same PGS Id
+When faults contain both Access Core and CAN Electronic PGS the pattern will be formed on the PGS Id with the greatest number of faults
+Where there are equal numbers of faults with the same two PGS Id (i.e. Access Core and CAN Electronic), the pattern will be formed on the Access Core PGS
+Faults are retained in a pattern for 72 hours from report date.
+Fault pattern will be retained for 72 hours from fault report date or for the timeframe configured by SOM in the ‘Update Age of Pattern Data’ table of Pattern Manager Admin 2.0
+Only the valid Symptom Code and Age of Pattern Data timeframe rules can be changed by SOM. Changes can only be made by a user with NODS-PM Super User Access Level via the Pattern Manager Admin function. All other rules are hard coded into Pattern Manager.
+NOTE: Fault patterns are NOT formed on other PGS types (e.g. DSLAM or CAN Radio)
+NOTE: ADSL Symptom codes for connectivity issues most indicative of exchange line problems have been added to the normal exchange line symptom code list."
+63,Display PGS fault pattern,"
+While a basic PGS fault pattern will ALWAYS form in the background of PGS Patterner, fault patterns will only become visible in an Exchange screen in PGS Patterner when the following criteria are met:
+The above patterning rules have been met and patterns have formed in the background
+The number of patterned faults is equal to or greater than the patterning threshold configured by SOM in the Update Patterning Threshold’ table of Pattern Manager Admin 2.0 for PGS
+For example, when the Threshold Setting is set to ‘4’ a fault pattern will only display when there are 4 patterned faults in the same exchange and the same PGS ID, etc."
+64,CMUX DSLAM catastrophic failure,"
+Catastrophic failure of a CMUX which is only providing ADSL broadband service can in rare circumstances result in a loss of telephony service along with internet. 
+As PGS Patterner does not form or display patterns on faults where the CMUX is only providing ADSL (i.e. via an ADSL* card/port) such an outage may not be immediately obvious as a PSTN outage on that CMUX, although it is highly likely that in the event of an extensive failure the following patterns would be visible:
+PGS Patterner – a pattern BOTH PSTN (‘NTN’) and ADSL (‘DT*”) on the CMUX POTS, RIM or other Access PGS which is providing the Exchange Access component of the customers’ services
+CAN Patterner – pattern(s) BOTH PSTN (‘NTN’) and ADSL (‘DT*”) on common Pillar, Cabinet or Main Cable
+BB CAN Patterner – pattern of ADSL faults on common Pillar, Cabinet or Main Cable displaying the failed CMUX in the right hand DSLAM column
+Switch Patterner – pattern of BOTH PSTN (‘NTN’) and ADSL (‘DT*”) faults formed on common Switch Id with Device type ‘LIG’ or ‘xxV’ e.g. ‘30V’
+SOM staff should contact SAO to confirm PSTN impact if in doubt."
+65,Table CMUX network role and Port/card types,"
+PGS Patterner will form a fault pattern on a CMUX whenever the card/port type is POTS, 2B1Q, ADSP or ADSLP i.e. Access Core or combination Access Core/DSL.
+PGS Patterner will NOT form fault patterns on a CMUX where the card/port type is ADSL (i.e. functioning as DSLAM in service only) although these faults may be included in otherwise valid patterns in which case the CMUX ADSL component will be “hidden’ in the right hand PGS columns (as with other types of DSLAM) but will be indicated by the presence of an ‘XR’ or ‘XS’ ADSL ‘X’ code. These faults may also appear in other Patterners e.g. BB CAN Patterner
+Sometimes 2 different CMUX will be deployed to provide service to a customer FNN – one to provide telephony (‘POTS’) and another to provide Broadband (‘ADSL’) e.g. CMUX E7 (using ‘POTS’ card) and CMUX E2 (using ‘ADSL2’ card)
+In these instances PGS Patterner will pattern on the Access Core CMUX and display it in the left hand PGS columns
+Sometimes different cards within the same CMUX will be used to provide service to a customer e.g. CMUX E7 (‘POTS’ card) and CMUX E7 (separate ‘ADSL2’ card)
+In these instances PGS Patterner will pattern on and display the POTS component (Panel/Slot/Channel of ‘POTS’ card) of the CMUX in the left hand PGS columns"
+66,CMUX Network Role,"
+CMUX may function in a customer’s service as either Access Core to provide exchange service (i.e. dial tone) in lieu of copper main cable or as DSLAM to provide ADSL internet service or both depending on the type of card or port used.
+In PGS Patterner 6.0 CMUX faults pattern and display according to the role the CMUX plays in providing customer service as indicated by the NPAMS Port type (refer Table 4):
+Access Core (PSTN or ISDN)
+DSLAM (ADSL)
+Combination (Access Core and ADSL)
+"
+67,Slave Unit,"
+An exchange based Network Unit (NU) feeding a series of remote Slave Units each with its own remote unit (AU). Each Slave Unit supplies services to a different geographical locality. 
+Slave Units appear separately in Pattern Manager with PGS ID like ‘E04003/2, E04003/3, etc.’ 
+PGS Patterner 6.0 forms and displays patterns by treating Slave Units as a separate PGS Id:
+ 4 faults each on a different Slave of the one PGS Id e.g. E7/2, E7/3, E7/5 and E7/7 will NOT form a valid pattern
+4 faults on the same slave unit e.g. E7/6, E7/6, E7/6 and E7/6 will form a valid pattern
+Outages affecting multiple Slave Units will not appear until the threshold is reached for one of the affected Slave Units. As the threshold is reached for other Slave Units they too will appear – as separate colour-differentiated patterns – providing a clue to the widespread nature of the outage"
+68,Master ,"
+An exchange based Network Unit (NU) feeding a remote based Access Unit (AU) either in the street or in a multi-storey building. Called a ‘master’ unit in common terminology.
+Appear in Pattern Manager with a PGS ID like “E04003”"
+69,CMUX Master and Slave types,"
+CMUX are complex Pair Gain Systems which can function in a variety of ways and configurations to deliver a combination of telephony (‘POTS’ – Plain Old Telephone Service), broadband (ADSL), ISDN and/or narrowband special services (data lines).
+CMUX have 2 main physical configurations:"
+70, CMUX patterning & display rules,"
+Due the ability of CMUX (Customer Multiplexer) PGS to perform various network roles for a service according to the card and port type installed, PGS patterner uses some additional rules for CMUX patterning and display:"
+71,PGS in secondary exchange,"
+Sometimes services are delivered by employing an Access PGS in a larger ‘secondary’ exchange to provide exchange access to a smaller sub-exchange. This is most commonly used in rural and remote areas. Typically the Remote Unit (RU) of the PGS will be co-located with exchange MDF in the sub-exchange building where the local main pairs will connect to the PGS C pairs. The RU then links back to the larger secondary exchange via its fibre link to the Exchange Unit (EU) of the PGS.
+This arrangement will result in the customer and their copper cable pairs (e.g. main cable and pillar) belonging to one exchange (e.g. LOST Lost River) and the Access PGS ‘feeding’ their service being in another exchange (e.g. GLBN Goulburn)
+Pattern Manager will display this like:
+In PGS Patterner:
+Pattern will form in exchange to which the customer and main cable belongs
+PGS will display in this pattern without any indication of belonging to another exchange
+The usual clue though is the presence of BOTH Access PGS AND Main Cable (normally an Access PGS REPLACES main cable)
+
+In CAN Patterner:
+Pattern will form in exchange to which the customer and main cable belongs
+A clue may be the presence of BOTH a Main Cable AND an active hyperlink to PGS Patterner (providing a pattern has formed in PGS Patterner as well)
+SOM Complex Consultants will need to be alert to these clues and to confirm the presence of a ‘secondary exchange’ PGS by checking cable details in Shazbot.
+A native NODS will need to be loaded on BOTH the PGS ‘secondary’ exchange and the customer exchange.
+Priority Patterner (and Mozart CONEN to NODS automation) will automatically load NODS in this way for these scenarios."
+72,Limitation on number of PGS displayed,"
+PGS Patterner 6.0 screen has only 2 sets of PGS display columns – one on the left coded to display Access Core PGS and another on the right to display CAN Electronic PGS. 
+This means that (comparatively rare) instances of where there are 2 Access Core PGS + 1 Small PGS or where there is one Access PGS and 2 Small PGS, one of the PGS will NOT be displayed. In these cases PGS Patterner will pattern and display the PGS closest to the exchange."
+73,Display of PGS types,"
+Only Access Core or CAN Electronic PGS types are displayed in PGS Patterner. 
+If a FNN in a PGS pattern contains another type of PGS e.g. FTTP, DSLAM or CAN Radio these PGS will not be displayed.
+The presence of other types of PGS can be only identified by the following clues:
+The right hand PGS column is blank AND…
+An ADSL ‘X’ code such as ‘XR’ or ‘XS’ will indicate the presence of a DSLAM
+A remote or island exchange (e.g. THUT Thursday Island) may include a CAN Radio PGS"
+74,Special PGS patterning and display rules,"
+In addition to the above basic PGS patterning and display rules there are some special rules:"
+75,PGS Fault Patterning Rules,"
+In PGS Patterner there are separate rules for:
+Forming a pattern of faults
+Displaying a pattern of faults
+Special PGS Rules"
+76,Analyse PGS Fault Pattern,"
+A related fault pattern in PGS Patterner is only an indication of a potential outage. To confirm the presence of an outage to a single network element having caused all the faults in the pattern, further detailed investigation and analysis must be conducted by SOM Complex Consultants using both the information in Pattern Manager itself and in external systems.
+The below sequence describes the basic general approach: 
+Check CONEN for an Network Incident on the affected Access Large PGS
+Check ‘! SOM Production’ mailbox for an email advice of Small PGS outage
+Investigate fault and network detail within the PGS pattern e.g. fault report times, symptom codes and common Panel and Slot
+Use hyperlinks to compare fault and network detail in other Patterners e.g. which fault pattern gives the clearer and more compelling evidence
+Investigate individual customer and fault details of each FNN in pattern, e.g. SIIAM case details, history and notes
+Run a SIIAM query to identify any related faults which did not meet patterning display criteria
+Investigate customer type and address patterns in CASINO (Clarification of Affected Services in Network Outage) tool
+Check relative location of faults using GDD (Graphical Data Display) network maps
+Ring CT’s or GOC for more information"
+77,Create NODS from PGS Patterner,"
+If an outage has been confirmed on a PGS network element included in the fault pattern, create a NODS notification directly from within PGS Patterner using the ‘Create NODS’ button.
+This provides the quickest response to the outage and ensures that FOH consultants and customers will be advised of the outage at the earliest opportunity.
+Follow these basic steps:
+Select the affected network element e.g. large or Small PGS ID using the Network Element selection field
+Enter the affected Panel and or Panel and Slot range in the Panel & Slot Selection fields e.g. Panel 3 Slots 1-3
+Click the ‘Create NODS’ button
+After a brief pause the NODS ID that has been created will display in the NODs ID column
+The NODS can be opened directly using this link, allowing changes to be made (e.g. adding Parent case and CONEN IDs)
+
+Refer also Section: 14.5"
+78,NOTE: Users with a PM Read-only Access Level can view the Check off code that has been applied by SOM but are unable to add or change Check off codes.,"
+For detailed instructions on the above, refer section 14.7
+For a table of valid check off codes and their meanings refer to section 14.8
+
+"
+79,Check off PGS Fault Pattern,"
+Once the pattern has been analysed and a determination made as to the findings and the action to be taken, each fault in the pattern must be ‘checked off’ to indicate this finding/action e.g. CVH = Confirmed Volume Hold or NYV = Not Yet Volume Hold.
+Initially, when first appearing, faults in a pattern will display the SIIAM case status of the fault when it first met Pattern Manager criteria e.g. Test-Pending or Field-Open.
+There are 3 methods of applying a check-off code:
+Apply a common code to all faults in the Exchange using the Update All function
+Apply a common code to selected faults in the Exchange using the selection boxes
+Apply a single code to each individual fault using the individual drop down lists
+To apply a check off action code to each fault in the pattern follow these basic steps:
+
+Choose the most appropriate Check off method from the above e.g. if all faults in the exchange are part of the one outage use Method 1
+Apply the correct code
+Click the Update or Update All buttons to save the code and update the exchange display and the totals in the Exchange list and Region Dashboard"
+80,PGS Patterner Version 6.0,"
+PGS Patterner 6.0 forms and displays fault patterns related by a common Pair Gain System network element e.g. Access Core Large PGS or CAN Electronic Small PGS.
+Click the PGS Patterner Version 6.0 link from the Pattern Manager home screen to access PGS Patterner."
+81,Access the required region by clicking the Region name link,"
+Regions are state-based with metro and country areas of the same state grouped together
+Regions are listed geographically North to South; East to West
+
+"
+82,Determine the region requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults
+"
+83,Quickly assess the relative volumes of patterned faults per region,"
+MO = Mode of Operations – the number of faults which must meet patterning criteria before a fault pattern will display in that region
+TOT = total number of patterned faults per region
+NEW = number of patterned faults in region not yet analysed and actioned
+% = percentage of patterned faults in region not yet analysed and actioned"
+84,Select Region,"
+When the Switch Patterner Version 6.0 link is clicked, the Switch Patterner Region Dashboard will open displaying the various geographical regions of the PSTN network and the number of patterned faults in each.
+The Region Dashboard allows a user to:"
+85,Access the required Node by clicking the Node link,"
+Regions are listed alphabetically"
+86,Determine the Node requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults"
+87,Quickly assess the relative volumes of patterned faults per Node,"
+tot = total number of patterned faults per node
+new = number of patterned faults in node not yet analysed and actioned
+Above the node list are displayed:
+Region name
+‘Printable’ link providing plain text view of region
+Last refresh date
+% faults unchecked in region
+Below the exchange list are displayed:
+Total faults in region
+Number unchecked faults in region"
+88,"NOTE: Unlike the other Patterners, Switch patterner organises related fault patterns by AXE or S12 Node. A Node is a ‘master’ exchange which controls the operation of several smaller local exchanges.","
+The actual exchange to which a Switch Pattern belongs can be seen within the Node pattern screen (see section 10.3 below)
+To the right of the Node List a version history gives details of the changes introduced in each successive version of Pattern Manager.
+The Node List allows a user to:"
+89,Select Node,"
+When a Region link is clicked, the Switch Patterner Node List will open displaying the various AXE or S12 Exchange Nodes which contain fault patterns and the number of patterned faults in each."
+90,System 12 Switch,"
+RSA (Remote Subscriber Access) Switch ID
+Network Address
+EN number
+Network Address group
+
+
+NODS ID
+If a NODS has been created automatically by Priority Patterner or manually from within Switch Patterner, the NODS ID will display here
+NODS manually created in native NODS will NOT display
+NODS auto-created by Mozart or other external interfaces will NOT display
+
+NODS category e.g. SA (CAN) or SB (Network)
+NODS status e.g. A (Active) or (Ceased)
+User ID of the user who has Checked off the fault pattern
+Check List (‘Chk Lst’) indicating determination made/action taken on fault pattern e.g. CVH – Confirmed Volume Hold – NYV – Not Yet Volume Hold (refer table section 14.8) 
+NOTE: ‘X’ Service Type does not display in Switch Patterner"
+91,AXE Switch,"
+RSS (Remote Switching Stage) Switch ID
+LI (line Interface) AXE Device Type
+LI number
+NPAMS 128 pair grouping
+"
+92,"NOTE: to simplify the display and make analysis easier, only Switch network elements are displayed in Switch Patterner plus the exchange and the primary CAN elements. To see Pair Gain Systems or other CAN elements present in a service or pattern it is necessary to use the hyperlinks (if active) or consult Shazbot or NPAMS.","
+Switch Elements:"
+93,Switch Node screen,"
+When a Node is clicked, the Node screen will present, displaying any related fault patterns present in the node along with key information to assist with initial analysis.
+Node List remains visible at left to allow quick selection of the next node.
+The main section of the screen displays basic details of customer faults reports which meet Switch patterning criteria (see next section 10.4).
+The following details are displayed from left to right in the middle section of the screen
+HP Hyperlinks – if the fault also appears in a fault pattern in another Patterner (e.g. PGS) the hyperlink letter will be bold and underlined:
+C (CAN) - P (PGS) – B (BB CAN)
+
+Faulty FNN (Full National Number)
+Date & Time of fault report
+Fault Symptom code (e.g. NTN – No Tone)
+Exchange to which Switch belongs
+Primary CAN Network Elements
+Main Cable ID – if any
+CAN Distribution element closest to the exchange e.g. Cabinet (‘C’), Gateway (‘G’), Pillar (‘P’) or Control Joint (‘CJ’)
+"
+94,Form Switch fault pattern,"
+A related fault pattern will form in the background in Switch Patterner whenever:
+2 or more SIIAM customer trouble reports meet the following criteria:
+Any Symptom code (either PSTN or ADSL)	and…
+Faults are in the same Node	and…
+Faults are in the same Switch ID	and…
+Faults are in the same Group (AXE 128 LI grouping or S12 Network address)	and…
+Faults have been reported within 24 hours of earliest fault in group
+Fault pattern will be retained for 72 hours from fault report date or for the timeframe configured by SOM in the ‘Update Age of Pattern Data’ table of Pattern Manager Admin 2.0
+Only the valid Age of Pattern Data timeframe rules can be changed by SOM. Changes can only be made by a user with NODS-PM Super User Access Level via the Pattern Manager Admin function. All other rules are hard coded into Pattern Manager.
+"
+95,Display Switch fault pattern,"
+While a basic CAN fault pattern will ALWAYS form in the background of Switch Patterner, fault patterns will only become visible in a Node screen in Switch Patterner when the following criteria are met:
+The above patterning rules have been met and patterns have formed in the background
+The number of patterned faults is equal to or greater than the patterning threshold configured by SOM in the Update Patterning Threshold’ table of Pattern Manager Admin 2.0
+For example, when the Threshold Setting is set to ‘5’ a fault pattern will only display when there are 5 patterned faults in the same Switch ID and same Group, etc.
+Each different Switch and Magazine Group pattern will be distinguished by a different band of background colour
+
+"
+96,Switch Fault Patterning Rules,"
+In Switch Patterner there are separate rules for:
+Forming a pattern of faults
+Displaying a pattern of faults
+Special patterning & display rules"
+97,Analyse Switch Fault Pattern,"
+A related fault pattern in Switch Patterner is only an indication of a potential outage. To confirm the presence of an outage to a single network element having caused all the faults in the pattern, further detailed investigation and analysis must be conducted by SOM Complex Consultants using both the information in Pattern Manager itself and in external systems.
+The below sequence describes the basic general approach:
+Check CONEN for an network Incident on the affected Access Large PGS
+Investigate fault and network detail within the PGS pattern e.g. fault report times, symptom codes and common Panel and Slot
+Use hyperlinks to compare fault and network detail in other Patterners e.g. which fault pattern gives the clearer and more compelling evidence
+Investigate individual customer and fault details of each FNN in pattern, e.g. SIIAM case details, history and notes
+Run a SIIAM query to identify any related faults which did not meet patterning display criteria
+Investigate customer type and address patterns in CASINO (Clarification of Affected Services in Network Outage) tool
+Ring GOC or CT’s for more information"
+98,Create NODS from Switch Patterner,"
+If an outage has been confirmed by GOC on a Switch network element included in the fault pattern, create a NODS notification directly from within Switch Patterner using the ‘Create NODS’ button.
+This provides the quickest response to the outage and ensures that FOH consultants and customers will be advised of the outage at the earliest opportunity.
+Follow these basic steps:
+Select the affected network element i.e. Switch ID and Switch Type using the Network Element selection fields
+Enter the affected LI/EN range in the LI/EN Selection field e.g. 1-256
+Click the ‘Create NODS’ button
+After a brief pause the NODS ID that has been created will display in the NODs ID column
+The NODS can be opened directly using this link, allowing changes to be made (e.g. adding Parent case and CONEN IDs)
+NOTE: The exact LI or EN range of an affected AXE or S12 Switch ID and/or magazine can be determined by using the JC08 ‘Display FF/LI (Digital) query in NPAMS.
+Refer also Section: 14.5"
+99,Check off Switch Fault Pattern,"
+Once the pattern has been analysed and a determination made as to the findings and the action to be taken, each fault in the pattern must be ‘checked off’ to indicate this finding/action e.g. CVH = Confirmed Volume Hold or NYV = Not Yet Volume Hold.
+Initially, when first appearing, faults in a pattern will display the SIIAM case status of the fault when it first met Pattern Manager criteria e.g. Test-Pending or Field-Open.
+There are 3 methods of applying a check-off code:
+Apply a common code to all faults in the Exchange using the Update All function
+Apply a common code to selected faults in the Exchange using the selection boxes
+Apply a single code to each individual fault using the individual drop down lists
+To apply a check off action code to each fault in the pattern follow these basic steps:
+Choose the most appropriate Check off method from the above e.g. if all faults in the exchange are part of the one outage use Method 1
+Apply the correct code
+Click the Update or Update All buttons to save the code and update the exchange display and the totals in the Exchange list and Region Dashboard
+For detailed instructions on the above, refer section 14.7
+For a table of valid check off codes and their meanings refer to section 14.8
+
+"
+100,Switch Patterner Version 6.0,"
+Switch Patterner 6.0 forms and displays fault patterns related by a common Exchange Switching network element e.g. AXE or System 12 switching technology.
+Click the Switch Patterner Version 6.0 link from the Pattern Manager Home screen to access Switch Patterner."
+101,Access the required region by clicking the Region name link,"
+Regions are state-based with metro and country areas of the same state grouped together
+Regions are listed geographically North to South; East to West
+
+"
+102,Determine the region requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults
+"
+103,Quickly assess the relative volumes of patterned faults per region,"
+MO = Mode of Operations – the number of faults which must meet patterning criteria before a fault pattern will display in that region
+TOT = total number of patterned faults per region
+NEW = number of patterned faults in region not yet analysed and actioned
+% = percentage of patterned faults in region not yet analysed and actioned"
+104,Select Region,"
+When the BB CAN Patterner Version 2.0 link is clicked, the BB CAN Patterner Region Dashboard will open displaying the various geographical regions of the PSTN network and the number of patterned faults in each.
+The Region Dashboard allows a user to:"
+105,Access the required exchange by clicking the Exchange link,"
+Exchanges are listed alphabetically"
+106,Determine the exchange requiring the greatest focus,"
+with the highest percentage of unchecked faults
+with the largest volume of unchecked faults"
+107,Quickly assess the relative volumes of patterned faults per exchange,"
+tot = total number of patterned faults per exchange
+new = number of patterned faults in exchange not yet analysed and actioned
+Above the exchange list are displayed:
+Region name
+‘Printable’ link providing plain text view of region
+Last refresh date
+% faults unchecked in region
+Below the exchange list are displayed:
+Total faults in region
+Number unchecked faults in region"
+108,Select Exchange,"
+When a Region link is clicked, the BB CAN Patterner Exchange List will open displaying the various exchanges which contain fault patterns and the number of patterned faults in each.
+To the right of the Exchange List a version history gives details of the changes introduced in each successive version of Pattern Manager.
+The Exchange List allows a user to:"
+109,NOTE:,"
+The left hand PGS columns display details for Access Core Large PGS e.g. CMUX, RIM, RCM, DCS20 and SSNMUX
+The right hand PGS columns display details for DSLAM PGS e.g. AM31, AM35, ASAM, ISAM and CMUX (with ADSL port/card type)"
+110,BB CAN Exchange screen,"
+When an Exchange is clicked, the Exchange screen will present, displaying any related fault patterns present in the exchange along with key information to assist with initial analysis.
+Exchange List remains visible at left to allow quick selection of the next exchange.
+The main section of the screen displays basic details of customer ADSL faults reports which meet BB CAN patterning criteria (see next section 11.4).
+The following details are displayed from left to right in the middle section of the screen
+HP Hyperlinks – if the fault also appears in a fault pattern in another Patterner (e.g. PGS) the hyperlink letter will be bold and underlined:
+C (CAN) – P (PGS) - S (Switch)
+
+Faulty FNN (Full National Number)
+Date & Time of fault report
+Fault Symptom code (e.g. DTG - NSYN – No Sync)
+PGS,DSLAM & basic CAN Network Elements
+Access Core large PGS ID – Type – P/S/C (Panel/Slot/Channel) e.g. CMUX or RIM
+Main cable/mpair – Cabinet/bpair – Gateway/opair – Pillar/opair
+DSLAM (Digital Subscriber Line Access Multiplexer)  ID – Type – P/S/C e.g. AM35
+If a Network Element column is blank, that type of network element is not present in that FNNs service
+NOTE: to simplify the display and make analysis easier, only Access and DSLAM PGS and basic CAN network elements are displayed in PGS Patterner. To see other CAN or Switch devices present in a service or pattern it is necessary to use the hyperlinks (if active) or consult Shazbot or NPAMS.
+‘X’ – Service Type as recorded in NPAMS e.g. XR = ADSL service – SS = PSTN service (see table section x.x)
+NODS ID
+If a NODS has been created automatically by Priority Patterner or manually from within CAN Patterner, the NODS ID will display here
+NODS manually created in native NODS will NOT display
+NODS auto-created by Mozart or other external interfaces will NOT display
+
+User ID of the user who has Checked off the fault pattern
+Check List (‘Chk Lst’) indicating determination made/action taken on fault pattern e.g. CVH – Confirmed Volume Hold – NYV – Not Yet Volume Hold (refer table section 14.8) "
+111,Form BB CAN fault pattern,"
+A related fault pattern will form in the background in BB CAN Patterner whenever:
+2 or more SIIAM customer trouble reports meet the following criteria:
+Symptom code is one of: DTG, DTI, URS, SSI, SSS, DTA, DTB, DTC, DTD, DTE, DTF, DTH, DTJ, DTK, DTL, DTM, DTN, DTO, DTP, DTQ, DTR, DTS, DTT, DTU, DTV, DTW, DTX, ULI,	and…
+Faults are in the same Exchange Service Area (ESA)	and…
+Faults are in the same Pillar	or…
+Where there is no Pillar, in the same Gateway
+Where there is no Gateway, in the same Cabinet	or…
+Where there is no Pillar, Gateway or Cabinet, in the same Main Cable	and…
+The O, branch or main pair is within 30 pairs of the lowest pair in the pattern
+Fault pattern will be retained for 72 hours from fault report date or for the timeframe configured by SOM in the ‘Update Age of Pattern Data’ table of Pattern Manager Admin 2.0
+Only the valid Symptom Code and Age of Pattern Data timeframe rules can be changed by SOM. Changes can only be made by a user with NODS-PM Super User Access Level via the Pattern Manager Admin function. All other rules are hard coded into Pattern Manager.
+"
+112,Display BB CAN fault pattern,"
+While a basic BB CAN fault pattern will ALWAYS form in the background of BB CAN Patterner, fault patterns will only become visible in an Exchange screen in BB CAN Patterner when the following criteria are met:
+The above patterning rules have been met and patterns have formed in the background
+The number of patterned faults is equal to or greater than the patterning threshold configured by SOM in the Update Patterning Threshold’ table of Pattern Manager Admin 2.0
+For example, when the Threshold Setting is set to ‘5’ a fault pattern will only display when there are 5 patterned faults in the same exchange and the same pillar, etc.
+Faults so displayed can be in the one 30 pair grouping or in a combination of 30 pair patterns 
+
+e.g. If the Threshold was set to 5 then the rule would be met if there were:
+5 faults in one 30 pair group
+E.g.  P5 – pairs 3 + 9 +10 +18 +25
+2 faults in one 30 pair group plus 3 faults in another 30 pair group or “2+3”:
+E.g.  P5 – pairs 3 + 9 plus 74 + 87 + 91 
+2 faults in one 30 pair group plus 2 faults in another plus 2 faults in another or “2+2+2”:
+E.g.  P5 – pairs 3 + 9 plus 51 + 56 plus 89+ 97
+Each 30 pair grouping is distinguished by a band of different background colour"
+113,CMUX provides ADSL DSLAM,"
+will display in the right hand PGS column when the CMUX is performing a purely DSLAM role using an ADSL port/card
+Refer PGS Section 9.4.3 for more detail"
+114,CMUX provides Access Core,"
+will display in the left hand PGS column when the CMUX is performing an Access Core using a POTS or ISDN 2B1Q port/card or combined Access/DSLAM role using a combination (‘combo’) port/card"
+115,CMUX display rules in BB CAN Patterner,"
+There are special rules for the display of CMUX in BB CAN patterner:
+CMUX will display differently in BB CAN Patterner depending on the network roles they play in providing customers’ services."
+116,Non-Broadband services appearing in BB CAN Patterner,"
+Some non-Broadband services are also reported using a DTP (Data Transmission Problem) symptom code but this is not an ADSL code.
+These may be ISDN, Faxstream or Dial-up Internet. These will also appear in BB CAN Patterner. In these cases, the right hand DSLAM PGS columns will always be blank and the ‘X’ code will be non-ADSL (e.g. ‘SS’ or ‘RA’)"
+117,ULL/SSS services,"
+ULL/SSS services for other Service Providers may appear in BB CAN Patterner but do not utilise a Telstra DSLAM device. The right hand DSLAM PGS column will always appear blank for ULL/SSS services "
+118,Control Joints,"
+Control Joints are not considered for patterning and are not displayed "
+119,Special patterning & display rules,"
+There are some special patterning and display rules in BB CAN Patterner rules for the display of CMUX in BB CAN Patterner:"
+120,BB CAN Fault Patterning Rules,"
+In CAN Patterner there are separate rules for:
+Forming a pattern of faults
+Displaying a pattern of faults
+CMUX Display rules
+Special patterning & display rules"
+121,Analyse BB CAN Fault Pattern,"
+A related fault pattern in BB CAN Patterner is only an indication of a potential outage. To confirm the presence of an outage to a single network element having caused all the faults in the pattern, further detailed investigation and analysis must be conducted by SOM Complex Consultants using both the information in Pattern Manager itself and in external systems.
+A primary method of determining if the BB CAN pattern is more likely to indicate a CAN issue versus a DSLAM issue is to check the right hand PGS column:
+Fault pattern with common DSLAM is more likely to be due to a broadband issue
+
+Fault pattern with multiple DSLAMs may indicate a CAN issue – investigate further
+Check CONEN for a network Incident on the affected DSLAM
+Check WFC Outage board for a known ADSL outage on the affected DSLAM
+Investigate fault and network detail within the BB CAN pattern e.g. fault report times, symptom codes and contiguity of affected pairs and whether services are provided over common DSLAM or not.
+Use hyperlinks to compare fault and network detail in other Patterners e.g. which fault pattern gives the clearer and more compelling evidence
+Investigate individual customer and fault details of each FNN in pattern, e.g. SIIAM case details, history and notes
+Run a SIIAM query to identify any related faults which did not meet patterning display criteria
+Investigate customer type and address patterns and pair occupancy of range in CASINO (Clarification of Affected Services in Network Outage) tool or NPAMS
+Check cable location and route and relative location of faults using GDD (Graphical Data Display) network maps
+Test services in SULTAN or OATS particularly when there is an apparent gap in the affected range (“testing within the range”)
+Ring CT’s or WFC for more information"
+122,Create NODS,"
+There is no functionality to enable NODS to be created directly in BB CAN Patterner.
+If the evidence points strongly towards a CAN issue affecting Broadband services, this should be brought to the attention of Assurance Ops Workflow Coordinators (WFC) so that further investigation can be undertaken.
+If it was deemed necessary to create a NODS for a BB CAN pattern, this will need to be done in native NODS."
+123,BVH Check off code,"
+There is a specific Check Off code to indicate a fault pattern which has been identified by SOM as belonging to an ADSL Outage already set up by WFC:
+BVH (Broadband Volume Hold)
+This can be identified by checking the WFC Outage Board on the following URL:
+The WFC Outage board contains both Active and Ceased outage lists. SOM need to check both. BVH will be applied to either an Active of Ceased WFC outage as these outages also use a Callbacks process to verify restoration.
+For detailed instructions on Checking off patterns, refer section 14.7
+For a table of valid check off codes and their meanings refer to section 14.8
+
+"
+124,Check off BB CAN Fault Pattern,"
+Once the pattern has been analysed and a determination made as to the findings and the action to be taken, each fault in the pattern must be ‘checked off’ to indicate this finding/action e.g. CVH = Confirmed Volume Hold or NYV = Not Yet Volume Hold.
+Initially, when first appearing, faults in a pattern will display the SIIAM case status of the fault when it first met Pattern Manager criteria e.g. Test-Pending or Field-Open.
+There are 3 methods of applying a check-off code:
+Apply a common code to all faults in the Exchange using the Update All function
+Apply a common code to selected faults in the Exchange using the selection boxes
+Apply a single code to each individual fault using the individual drop down lists
+To apply a check off action code to each fault in the pattern follow these basic steps:
+
+Choose the most appropriate Check off method from the above e.g. if all faults in the exchange are part of the one outage use Method 1
+Apply the correct code
+Click the Update or Update All buttons to save the code and update the exchange display and the totals in the Exchange list and Region Dashboard"
+125,Broadband Patterner Version 2.0,"
+Broadband (BB) CAN Patterner 2.0 forms and displays broadband fault patterns related by a common CAN copper cable network element e.g. main cable, cabinet, gateway, or pillar.
+Click the BB CAN Patterner Version 2.0 link from the Pattern Manager home screen to access BB CAN Patterner."
+126,Unchecked,"
+A large fault pattern has not been checked off
+Configured by SOM in ‘Update Priority Thresholds’ in Pattern Manager Admin
+Configured as ‘x’ number of faults e.g. 20 = 20 faults unchecked
+Unchecked PPs just form on the whole exchange
+Auto-NODS are never created for Unchecked PPs
+Priority Pattern alerts can be triggered from fault patterns in any of the 4 Patterners, if they meet the Priority patterning criteria:
+CAN Patterner
+PGS Patterner
+Switch Patterner
+BB CAN Patterner
+Auto-NODS will only be created by Pattern Manager for:
+CAN Priority Patterns
+PGS Priority Patterns
+When an Auto-NODS has been created, faults in the pattern will be automatically checked off with the Check Off code ‘AVH’ (Automatic Volume Hold)
+SOM Complex Consultants investigate, validate and manage Priority Patterns by use of the Priority Outage Dashboard.
+Click the Priority Outage Dashboard link from the Pattern Manager home screen to access Priority Dashboard.
+The Priority Outage Dashboard will display:"
+127,Fast ,"
+A fault pattern has formed rapidly in a short timeframe
+Configured by SOM in ‘Update Priority Thresholds’ in Pattern Manager Admin
+Configured as ‘x’ number of faults per ‘y’ hours e.g. 12/6 = 12 faults in 6 hours
+Fast PPs form on specific Network Elements e.g. main cables or PGS
+Pattern Manager will automatically create a NODS (‘Auto-NODS’)for CAN or PGS PPs"
+128,Action,"
+The determination made/action taken by SOM after investigation of the Priority Pattern"
+129,User,"
+The SOM User who has actioned the Priority pattern record in the Priority Outage Dashboard"
+130,Created Date,"
+The Date and Time the Priority pattern was formed"
+131,Auto NODS,"
+Whether or not an Auto-NODS has been created – Yes/No"
+132,Active Trigger,"
+The trigger which caused the Priority pattern to form i.e. ‘Fast’ or ‘Unchecked’"
+133,Current Reports,"
+The number of fault reports in the Priority patterns at the time it formed
+If new fault reports again meet the Priority patterning criteria, a new Priority pattern will be formed and displayed"
+134,Associated Patterners,"
+The Standard hyperlink code letter of any other Patterners in which any of the faults in the Priority pattern also belong
+Since the Priority pattern record in the Dashboard represents a number of faults it is not possible for this to be an active hyperlink"
+135,Type,"
+The Patterner in which the pattern has formed e.g. CAN, PGS, Switch or BB CAN"
+136,Range,"
+The Pair or LI/EN device range on which the Priority Pattern has formed"
+137,NE ID,"
+The Cable, Pillar, etc. number or PGS or Switch ID on which the Priority pattern has formed"
+138,Network Element,"
+The Network element on which the Priority Pattern has formed
+CAN = Main, cabinet, Gateway, Pillar or Control Joint
+PGS = PGS Type e.g. RIM or RAM 8
+Switch = Switching technology i.e. AXE or S12
+BB Can = as per CAN"
+139,Exch/Node,"
+The Exchange in which the Priority Pattern has formed
+Is an active hyperlink to the Exchange where the Priority pattern has formed
+If the Priority Pattern has formed on a Switch, the Exch hyperlink will take the user to the first FNN in the pattern for that exchange within the relevant AXE/S12 Node"
+140,Region,"
+The standard pattern Manager Region in which the Priority Pattern has formed"
+141,Priority Settings,"
+The currently configured threshold for the type of Priority pattern e.g. 12/6 (Fast) or 20 (Unchecked)"
+142,Priority Outage Display,"
+The Priority Outage Dashboard displays the following information:"
+143,Priority Patterning Rules - Unchecked,"
+An Unchecked Priority Pattern (PP) will be formed in any of the 4 Patterners when the current Priority Patterning criteria as configured in Pattern Manager Admin are met.
+Very simple rules apply to the patterning rules for Unchecked PPs:
+The number of unchecked patterned faults in an exchange has met or exceeded the Unchecked Reports Threshold set by SOM in Pattern Manager Admin e.g. 20
+
+The PP alert will display in the Priority Outage dashboard on the whole exchange and may relate to a number of network elements e.g. more than one PGS ID
+
+An Auto-NODS will never be created"
+144,Patterner Hierarchy rule,"
+The Priority Patterner hierarchy rule determines in which Patterner and on which network element the PP (and auto-NODS) is created:
+If a fault pattern in any of the 4 Patterners meets PP criteria and is NOT in any other patterner, form the PP on that Patterner and NE
+E.g. a pattern of faults on a Switch meets PP criteria – a PP is formed on the Switch and displayed in Priority Outage Dashboard
+If a fault pattern in either Switch and/or BB CAN meets PP criteria but is also in either CAN and/or PGS patterners, form the PP on either CAN or PGS Patterner according to the next 2 rules
+E.g. a pattern of faults on a Switch meets PP criteria but is also on a main cable in CAN patterner – a PP is formed on the main cable in CAN patterner in Priority Outage Dashboard along with a S entry in the hyperlink column
+If a fault pattern in both PGS and CAN Patterners meets PP criteria, form the PP on the one with the greater number of faults in it.
+E.g. a pattern of faults on a Pillar in CAN Patterner meets PP criteria but is also on a Small PGS in PGS Patterner. There are more faults in the CAN pattern– a PP is formed on the Pillar in CAN Patterner and displayed in Priority Outage Dashboard along with a P entry in the hyperlink column
+If a fault pattern in both PGS and CAN Patterners meets PP criteria, and the number of faults in each is equal, form the PP on the PGS Patterner and element
+E.g. a pattern of faults on a Cabinet in CAN Patterner meets PP criteria but is also on a RIM in PGS Patterner. There are an equal number of faults in each – a PP is formed on the RIM in PGS Patterner in Priority Outage Dashboard along with a C entry in the hyperlink column"
+145,PGS Patterner,"
+The following rules are used by Pattern Manager to determine the Network Element and range on which to form a Fast PGS Priority pattern and Auto-NODS
+If, according to Patterner Hierarchy rules, the PP will be formed on the PGS pattern…
+Priority Pattern will form on the PGS ID e.g. TBNE RIM E9801
+If PGS Type is RIM or CMUX and all faults are on same Panel AND Slot, create PP just on that on Panel and Slot of the PGS ID e.g. TBNE RIM E9801 Panel 3 Slot 4
+If PGS Type is RIM or CMUX and all faults are on same Panel but different Slots, create PP just on that on the Panel of the PGS ID e.g. TBNE RIM E9801 Panel 3
+If PGS Type is RIM or CMUX and faults are on different Panels, create PP on whole PGS ID e.g. TBNE RIM E9801
+If PGS Type is RCM, DC20 or SSNMUX create PP on whole PGS ID e.g. STHE DCS20 E20
+If PGS Type is CAN Electronic Small PGS e.g. 6/16 or RAM 8 create PP on whole PGS ID e.g. CHLT RAM8 Ph1 E7
+Display PP alert details in the Priority Outage dashboard according to whichever of the above rules applies
+Create an Auto-NODS according to whichever of the above rules applies"
+146,Switch Patterner,"
+The following rules are used by Pattern Manager to determine the Network Element on which to form a Fast Switch Priority pattern
+If, according to Patterner Hierarchy rule, the PP will be formed on the Switch pattern…
+Priority Pattern will form on the alpha character component of the Switch ID which meets the PP Trigger criteria e.g. VPNS
+E.g. If the combined total of faults across Switch Ids VPNS01, VPNS02 and VPNS03 meets the criteria for PP, a single PP will be created across faults in all 3 Switch IDs and display in Priority Outage Dashboard as a single PP alert on AXE VPNS SWITCH
+Switch magazines and LI/EN ranges will always be ignored when Switch Priority patterns are being created
+Display PP alert details in the Priority Outage dashboard according to the above rules
+NOTE: An Auto-NODS is never created for a Switch Priority Pattern
+"
+147,NOTE: An Auto-NODS is never created for a BB CAN Priority Pattern,"
+
+"
+148,BB CAN Patterner,"
+The following rules are used by Pattern Manager to determine the Network Element on which to form a Fast BB CAN Priority pattern
+If, according to Patterner Hierarchy the PP will be formed on the BB CAN pattern…
+Priority Pattern will form on the CAN Network Element closest to the exchange according to the same criteria as for CAN Patterner 6.0 above
+Display PP alert details in the Priority Outage dashboard according to the above rules"
+149,Pillar or Control Joint,"
+the start pair of the Auto-NODS range will be rounded down to the next even ‘10 +1’ below the lowest displayed value, including 0. 
+E.g. if the lowest pair in the pattern was 21 the start pair of the NODS range will be Pair 21
+if the lowest pair in the pattern was 245 the start pair of the NODS range will be Pair 240 
+the end pair of the Auto-NODS range will be rounded up to the nearest ‘10’
+E.g. if the highest pair in the pattern was 21 the end pair of the NODS range will be Pair 30
+if the highest pair in the pattern was 383 the end pair of the NODS range will be Pair 380 "
+150,Cabinet or Gateway,"
+the start pair of the Auto-NODS range will be rounded down to the next even ‘50 +1’ below the lowest displayed value, including 0. 
+E.g. if the lowest pair in the pattern was 71 the start pair of the NODS range will be Pair 51
+if the lowest pair in the pattern was 245 the start pair of the NODS range will be Pair 201 
+the end pair of the Auto-NODS range will be rounded up to the nearest ‘100’
+E.g. if the highest pair in the pattern was 21 the end pair of the NODS range will be Pair 50
+if the highest pair in the pattern was 783 the end pair of the NODS range will be Pair 800 "
+151,Main Cable ,"
+the start pair of the Auto-NODS range will be rounded down to the next even ‘100 +1’ below the lowest displayed value, including 0. 
+E.g. if the lowest pair in the pattern was 71 the start pair of the NODS range will be Pair 1
+if the lowest pair in the pattern was 245 the start pair of the NODS range will be Pair 201 
+the end pair of the Auto-NODS range will be rounded up to the nearest ‘100’
+E.g. if the highest pair in the pattern was 71 the end pair of the NODS range will be Pair 1500
+if the highest pair in the pattern was 1483 the end pair of the NODS range will be Pair 201"
+152,"Rule #3 next, selecting the first CAN NE above which meets Rule #1, apply Pair Range Contiguity Rule #2, as follows:","
+If Main Cable, does the main pair range include a break in contiguity of > 200 pairs
+If yes, then does the Cabinet B Pair range (if present) include a break in contiguity of > 100 pairs
+If yes, the does the Gateway O Pair range (if present) include a break in contiguity of > 50 pairs
+If yes, the does the Pillar O Pair range (if present) include a break in contiguity of > 50 pairs
+If yes, the does the CJ O Pair range (if present) include a break in contiguity of > 30 pairs
+
+If NO network element can meet either Rules #1 and #2 or #1 and #3, Pattern Manager will NOT create an Auto-NODS but will display a Priority Pattern alert on the Dashboard
+If Rules #1 and #3 can be met,  the first CAN network element and pair range which meets Rules #1 and #3 will be selected by Pattern Manager on which to create the CAN Priority Pattern and Auto-NODS
+However, before an CAN Auto-NODS can be created, Pattern Manager must consult the following rule to determine the start and end pairs of the pair range to be used:
+Rule #4 Rounding out the CAN pair ranges"
+153,"Rule #2 next, selecting the first CAN NE above which meets Rule #1, apply Pair Range Contiguity Rule #2, as follows:","
+If Main Cable, does the main pair range include a break in contiguity of > 100 pairs
+If yes, then does the Cabinet B Pair range (if present) include a break in contiguity of > 50 pairs
+If yes, the does the Gateway O Pair range (if present) include a break in contiguity of > 50 pairs
+If yes, the does the Pillar O Pair range (if present) include a break in contiguity of > 30 pairs
+If yes, the does the CJ O Pair range (if present) include a break in contiguity of > 30 pairs
+The first CAN network element and pair range which meets Rules #1 and #2 will be selected by Pattern Manager on which to create the CAN Priority Pattern and Auto-NODS
+If NO CAN network element meets BOTH Rule #1 and #2 but can meet Rule #1 then Pattern manager will use Rule #3 below
+"
+154,CAN PP Rule #1 First decide on the Network Element on which all the faults are:,"
+are all services on one Main Cable
+If no, are all services on one Cabinet
+If no, are all services on one Gateway
+If no, are all services on one Pillar
+If no, are all services on one Control Joint
+"
+155,CAN Patterner,"
+The following rules are used by Pattern Manager to determine the Network Element and range on which to form a Fast CAN Priority pattern and Auto-NODS.
+Due to the number of possible Network Elements and valid cable Pair ranges involved in CAN fault patterns, the rules which Pattern Manager uses to determine on which Network Element and pair range to set up a CAN Priority Pattern and Auto-NODS are quite complex
+If, according to Patterner Hierarchy rules, the PP will be formed on the CAN pattern…
+Priority Pattern will form on the CAN Network Element in order of the closest to the exchange which meets CAN rules #1, #2 and #3:"
+156,Network Element rules,"
+As well as determining which Patterner a Priority Pattern must be formed in, Patten Manager also has to determine on which of the Network Elements present in the faults in the pattern it should create the PP (and the Auto-NODS).
+Pattern Manager determines the network element on which to set up a PP by the following rules.
+There are different rules for each Patterner:"
+157,Priority Patterning Rules - Fast,"
+More complex rules apply to the patterning and display of Fast PPs:
+The number of patterned faults has met or exceeded the threshold number set by SOM in Priority Manager Admin for a particular timeframe threshold in a region e.g. a pattern of 6 faults has been reported within a timeframe of 5 hours for NSWN region which meets the threshold set by SOM of 6 faults in 5 hours for that region.
+
+In addition to this basic trigger rule, additional rules apply as to:
+
+Which Patterner the PP will be formed in if FNNs exist in more than one Patterner
+E.g. a Fast pattern of FNNs in PGS Patterner is also present in CAN
+Which Network Element the PP will be formed on
+E.g. will a Fast CAN pattern be formed on main cable or Pillar
+Which pair range (if any) the PP will be formed on
+E.g. will the Fast pattern be formed on the whole PGS or just a C pair range
+Whether a NODS will be auto-created for the Fast pattern
+See the following sub-sections for details of these rules."
+158,Priority Pattern Auto NODS,"
+As well as triggering a Priority Pattern alert on the Priority Outage dashboard, Pattern Manager will also attempt to automatically create a NODS on the Exchange, network element and pair range on which the Priority Pattern was formed.
+Priority Patterner auto-NODS will only be created on:
+CAN Priority Patterns
+PGS Priority patterns
+Pattern Manager will use the same logic for creating the CAN or PGS Auto-NODS as it uses to create the Priority pattern itself. Refer previous sections 12.2 and 12.3.
+E.g. a Priority Pattern has been triggered by Fast criteria and has been created according to the Patterning rules in sections 12.2 and 12.3 on PTMA PGS RIM E2013 Panel 4. An Auto NODS will also be created on PTMA PGS RIM E2013 Panel 4.
+If a PGS on which a Priority pattern and an Auto-NODS is being created is one belonging to a secondary exchange which is feeding services in a smaller sub-exchange, Pattern Manager will create the Auto-NODS on the secondary PGS exchange but also add the customer sub-exchange. Refer section 9.4.4.
+When Pattern Manager has been able to create an Auto-NODS for a priority pattern, the following will occur:
+The ‘Auto-NODS’ column in Priority Outage Dashboard will have a ‘Yes’ entry
+The Auto-NODS ID will be added to the ‘NODS_ID’ column of all FNNs in the relevant Patterner
+If, despite using the rules in sections 12.1 and 12.3, Pattern Manager has not been able to determine the correct Network Element and range, it will create the PP and display on the Priority Outage Dashboard but will NOT create an Auto-NODS. The ‘auto-NODS’ column on the dashboard will display ‘No’
+Auto-NODS are NEVER created for Switch or BB CAN Priority Patterns.
+Auto-NODS created by Pattern Manager will have the identical attributes to one created in native NODS by a SOM user with the following exceptions:
+An Expected Restoration and ETR will ALWAYS be derived from the SOM Outage ETR matrix table
+There will be NO Outage Parent case or CONEN entered in the Outage Description text
+Source System will be Pattern Manager
+Created User will be Auto-CAN or Auto-PGS
+Refer also work Instruction  NODS for Service Outage Management"
+159,Investigate Priority Pattern,"
+When a new Priority pattern appears in the Priority Outage Dashboard it will need to be investigated by a SOM Complex Consultant.
+Investigation of a Priority pattern has 3 objectives:
+Validate the Priority Patterning
+Update the Auto-NODS (if one was created)
+Perform any other required Outage Set-up actions or delegate to other SOM staff
+SOM Complex Consultants will follow this basic routine to manage Priority Outage Dashboard:
+Monitor Priority Outage Dashboard frequently and regularly thought the day
+Action ‘New’ PP alerts as they appear
+Select ‘In Progress’ in the Action drop down list
+Review the key details of the PP in the Dashboard to quickly get a picture of size, risk and urgency:
+What is the Trigger?
+How many faults in the outage?
+Has an Auto NODS been created
+Where is the outage?
+What Network Element and range has the PP formed on?
+Click the Exchange link to open the Exchange or Node in which the Priority Pattern has formed:
+PP will be Checked off ‘AVH’
+NODS ID will be present if NODS auto-created
+Analyse the Pattern as per BAU Pattern Manager related fault pattern analysis procedures
+Determine the following:
+Is there a valid outage?
+Has Pattern Manager correctly identified the affected network element and range? 
+Is the Auto-NODS correctly created?
+What needs to be done to set up the outage or perform other response (e.g. link faults)?
+Carry out required actions or delegate to other SOM staff or Partners:
+Place on Watch in dashboard and patterner(s) if more evidence required or…
+Update auto-NODS or…
+Create manual NODS from within Patterner 
+Set up outage Parent, Query SIIAM, create CNO Log, etc. or…
+Email SOM Simplex or Partners to complete the Outage setup or…
+Cease auto-NODS and update Patterner Check off code if an alternative response is required e.g. Linking faults
+Action the PP alert in the Dashboard according to the findings, as per section 12.5 below
+Repeat the above process for the next ‘New’ PP alert"
+160,Action Priority Pattern,"
+When a new Priority Pattern alert first appears in the Priority Outage Dashboard the Action field will display ‘New’ to alert SOM Complex consultants to the need to investigate it.
+When the SOM Complex Consultant commences their investigation they will change the Action code to ‘In progress’ and click the ‘Update’ button. This will update the User field with their User ID.
+After completing required investigations and actions, the SOM Complex consultant will change the Action code to one of two outcome Actions (and click Update button):
+
+‘Watch’ – Priority pattern has been investigated but findings are inconclusive - awaiting further evidence
+
+‘Complete’ – Priority pattern has been investigated and validated All required actions have been completed or delegated to other staff to complete e.g. update Auto-NODS, Set up Outage, etc. 
+
+When ‘Complete’ action is selected & updated the record will clear from the Priority Outage Dashboard but the actual related fault pattern in the relevant patterner will remain
+ 
+
+"
+161,Priority Outage Dashboard,"
+Priority Outage Dashboard displays key details of fault patterns in any of the 4 Patterners which have met the criteria for a fast forming or large unchecked Priority Pattern (PP) alert.
+Priority Patterns (PP) are those which pose the greatest risk to customer service and business operations.
+The Priority Patterning functionality is designed to assist SOM in periods of peak fault volumes and/or natural disaster when the capability of SOM and other workgroups to respond to the very high fault volumes can be severely tested. 
+There are 2 triggers for the forming and display of a Priority Pattern alert in the Dashboard:"
+162,Audit Trail Report,"
+Allows SOM Manager to keep track of changes in order to ensure that 
+Required changes have been made
+Due process and governance has been followed
+NOTE: Changes made in SOM Admin 2.0 will only take effect at the next system update. Pattern Manager updates (refreshes) approximately every 10 - 15 minutes. Refer to Section 8.3 Patterner System Refresh Rates Table 9 for details on how to calculate when the changes will take effect."
+163,Auto Outage Exchange,"
+Allows SOM to exclude exchanges from having NODS auto-created. This is most commonly done for exchanges which have been asset transferred to Nbnco"
+164,Update Exchange,"
+Allows SOM to add new or delete obsolete exchanges or to move exchanges between Regions (e.g. to align with Regional restructures)"
+165,Update PGS Types,"
+Allows SOM to include new PGS types into Pattern Manager or to delete obsolete types withdrawn from service"
+166,Update Symptom Code,"
+Allows SOM to modify the types of faults considered as candidates for patterning."
+167,Update Checklist Code,"
+Allows SOM to add new check-off codes or delete obsolete ones"
+168,Update Age of Patterning data,"
+Allows SOM to change the timeframe in which faults will remain in Pattern Manager"
+169,Update Patterner Thresholds,"
+Allows changes to be made to the minimum number of patterned faults which will be displayed in a pattern for each Patterner and Region.
+Allows SOM to respond quickly to changes in workload, staffing and other operational requirements in order to maintain the most efficient, effective outage identification"
+170,Update Priority Thresholds,"
+Allows SOM to change the thresholds at which a fault pattern will be deemed a Priority Pattern
+There are 2 Priority Patterning thresholds:
+Fast Forming
+Large Unchecked"
+171,Guidelines for Pattern Manager Admin changes,"
+Changes to Pattern Manager Admin settings can be made in order to implement:
+General, long-term system, process and operational performance improvements as a result of 
+continuous improvement, new initiatives, troubleshooting, feedback, etc. or 
+changes to systems, process or business objectives
+Short Term, local changes to manage a local, short duration issue e.g.
+Peak workload or natural disaster
+To ensure that changes made to pattern Manager have the desired positive outcomes, the following guidelines should be followed: 
+Propose changes on the basis of clear thinking and evidence
+Test changes in a low risk way, e.g. by introducing to one region
+Advise other users of the change and the reason
+Advise other users of any changes to their ways of working as a result of the change
+Review results of the change
+Document adopted changes
+Long term general changes should be documented by updating this work instruction 017921w14 Pattern Manager 6.0
+Short Term changes which are likely to be adopted as a Mode of Operations may need to be documented in other work instructions such as 017921w01 SOM Natural Disasters as well this work instruction."
+172,To re-configure the Priority Pattern Fast Forming Threshold follow these steps:,"
+On Administration Page select the ‘Update Patterner Thresholds’ option 
+In ‘Select Region to set Threshold’ select the required Region from the drop down list e.g. QLDC – Queensland Country
+In ‘# of reports’ type the number of faults necessary to trigger a Priority pattern e.g. ‘12’
+In ‘Hours’ type the number of hours in which the above number of faults must be reported in order to trigger a Priority Pattern e.g. ‘6’
+Click Update button
+NOTE: Different thresholds can be set for different regions. The threshold for fast patterns will apply to ALL Patterners in the selected Region"
+173,To re-configure the Priority Pattern Unchecked Threshold follow these steps:,"
+On Administration Page select the ‘Update Priority Thresholds’ option
+In ‘Modify Unchecked Reports’ type the new number of faults at which a Priority pattern will be triggered e.g. ‘15’
+Click  Modify button
+NOTE: The Unchecked value always applies to ALL Patterners in ALL Regions"
+174,Update Priority Thresholds,"
+The Update Priority Threshold option allows SOM Super Users to reconfigure the triggers for forming Priority Patterns:
+Reset number of faults and required timeframe to form a ‘Fast Forming’ priority pattern
+Reset number of unchecked faults required to form an ‘Unchecked’ priority pattern
+The ‘Current Priority Outage Threshold values’ table displays the current thresholds for each Priority pattern type and each region."
+175,Update Patterner Thresholds,"
+The Update Patterner Threshold option allows SOM Super Users to reset the number of faults in a pattern at which a Pattern Manager will display a related fault pattern.
+Different threshold can be applied for different Patterners and for different regions in Patterners
+E.g. If all regions in CAN Patterner are set to a threshold of ‘5’, patterns will not be presented until there are at least 5 faults in the same exchange and same pillar which are in 30 pair groupings.
+If Brisbane and QLDC are then reset to 3, fault patterns will appear earlier in those particular regions, when there are only 3 faults in a pattern.
+The fault display threshold settings for each Patterner/Region are also known as the Mode of Operation (‘MO’). The Patterner Threshold applied will appear.
+To re-configure the Patterner Thresholds follow these steps:
+On Administration Page select the ‘Update Patterner Thresholds’ option
+In the ‘Modify Thresholds’ window enter the required values:
+New Threshold number
+Required Region
+Required Patterner
+Click ‘Update’ button
+To make multiple selections, repeat steps ‘6’ and ‘7’
+Return to selected Patterner Region dashboard – ‘MO’ (Mode of Operations) column will now display new updated threshold in blue
+Change to fault threshold will take place at next refresh - note time on the Exchange Selection list that the system was last refreshed and add 10 minutes to calculate when change will occur.
+Advise users"
+176,Update Age of Patterning Data,"
+The Update Age of Patterning Data option allows SOM Super Users to modify the timeframe on which a fault pattern will be retained in Pattern Manager prior to expiring.
+To re-configure the Age of Patterning Data timeframe follow these steps:
+On Administration Page select the ‘Update Age of Patterning Data’ option
+‘Age of patterning data (days)’ field displays the current setting
+In Modify Data Age, in data Age (in days) select the required number of days the fault pattern is to remain active in Pattern Manager e.g. ‘5’
+Click Update button
+NOTE: The Age of Data value selected will apply to ALL Patterners in ALL Regions"
+177,Update Checklist Code,"
+The Update Checklist Codes option allows SOM Super Users to add new or delete or modify existing Checklist codes
+Checklist codes represent standard options for the way SOM actions related fault patterns. 
+To re-configure the Check Off Code List follow these steps:
+On the Administration page, select the ‘Update Checklist Codes’ option
+In the ‘Modify Checklist Codes’ window enter the required Checklist code to be added or deleted:
+Click ‘Add’ button to add a new code
+Click ‘Delete’ button to delete an existing code
+To make multiple selections, repeat steps ‘6’ and ‘7’ or ‘6’ and ‘8’
+The new code will now be available immediately in the Check code drop down list"
+178,Update Symptom Code,"
+The Update Symptom Codes option allows SOM Super Users to add new or delete existing SIIAM fault symptom codes.
+To re-configure the Symptom Code List follow these steps:
+On the Administration Page, select the ‘Update Symptom Codes’ option
+In the ‘Modify Symptom Codes’ window enter the required Symptom code to be added or deleted:
+Click ‘Add’ button to add a new code
+Click ‘Delete’ button to delete an existing code
+To make multiple selections, repeat steps ‘6’ and ‘7’ or ‘6’ and ‘8’
+Change to symptom codes included in fault patterns will take place at next refresh - note time on the Exchange Selection list that the system was last refreshed and add 10 minutes to calculate when change will occur.
+Advise other users of change and reason"
+179,Update PGS Type,"
+The Update PGS types option allows SOM Super Users to add new or delete existing Pair Gain System (PGS) types.
+Changes to PGS type would normally only be made when:
+New PGS Types are introduced into service
+Older existing PGS types are withdrawn from service
+Pattern Manager only recognises PGS Types which are entered in the precise format used by SIIAM – the system from Pattern Manager collects its data.
+Each PGS Type must be allocated a ‘PGS Class’ i.e. network role. There are 3 PGS Network roles recognised by pattern Manager:
+Access Core (large PGS e.g. CMUX, RIM, etc.)
+CAN electronic (small PGS e.g. RAM 8, SCADS, etc.)
+ADSL DSLAM (e.g. AM35, ISAM, etc.)
+To re-configure the PGS Type List follow these steps:
+On Administration Page, select the ‘Update PGS Types’ option
+In the ‘Modify PGS Types’ window enter the required ‘PGS Type’ to be added or deleted:
+In the ‘PGS Class’ field enter the required network role e.g. ‘Access Core’
+Click ‘Add’ button to add a new type
+Click ‘Delete’ button to delete an existing type
+To make multiple selections, repeat steps ‘8’, ‘9’ and ‘10’ or ‘8’, ‘9’ and ‘11’
+Change to PGS Type included in fault patterns will take place at next refresh - note time on the Exchange Selection list that the system was last refreshed and add 10 minutes to calculate when change will occur.
+Advise other users"
+180,Update Exchange,"
+Clicking the Update Exchange option allows SOM Super Users to add new or delete existing Exchanges or to move an existing exchange from one Pattern Manager Region to another (e.g. from country to metro).
+Changes to Exchange will be rare and would normally only be made when:
+New exchange has been commissioned
+Old exchange has been decommissioned
+A Regional restructure has caused an exchange previously in a country area to now be metro (or vice versa)
+To re-configure the Exchange List follow these steps:
+On Administration Page, select the ‘Update Exchange’ option
+In the ‘Modify Exchange’ window enter the required ‘Exchange code’ to be added or deleted:
+In the ‘Region from’ field enter the Region from which the exchange  is to be removed
+In the ‘Region to’ field enter the Region to which the exchange  is to be moved
+Click ‘Add’ button to add a new exchange
+Click ‘Delete’ button to delete an existing exchange
+Click ‘Move’ button to move an existing exchange
+To make multiple selections, repeat steps ‘8’, ‘9’ and ‘10’ or ‘8’, ‘9’ and ‘11’
+Change to Exchange included in fault patterns will take place at next refresh - note time on the Exchange Selection list that the system was last refreshed and add 10 minutes to calculate when change will occur.
+Advise other users"
+181,Update Auto Outage Exchange,"
+Clicking the Update Auto Outage Exchange option allows SOM Super Users to add Exchanges to an ‘exclusion’ list which will prevent Pattern Manger from creating auto-outages on these exchanges.
+This is primarily used to prevent inappropriate outages being automatically set up on exchanges whose CAN copper cables have been asset-transferred to Nbnco.
+To update the Auto-Exchange exclusion List follow these steps:
+On Administration Page, select the ‘Update Auto Exchange’ option
+In the ‘Modify Exchange’ window enter the required ‘Exchange code’ to be added or deleted:
+In the ‘Region from’ field enter the Region from which the exchange  is to be removed
+In the ‘Region to’ field enter the Region to which the exchange  is to be moved
+Click ‘Add’ button to add a new exchange
+Click ‘Delete’ button to delete an existing exchange
+Click ‘Move’ button to move an existing exchange
+To make multiple selections, repeat steps ‘8’, ‘9’ and ‘10’ or ‘8’, ‘9’ and ‘11’
+Change to Exchange included in fault patterns will take place at next refresh - note time on the Exchange Selection list that the system was last refreshed and add 10 minutes to calculate when change will occur.
+Advise other users"
+182,Step-by-step instructions for accessing Audit Trail Report,"
+Identify a valid business need to access the Audit Trail report
+On the main Patterner Selection screen, select the SOM Administrator option
+On the SOM Administration screen, select the ‘Audit Trail Report’ option
+In the ‘Audit Trail Report’ window enter the following details:
+From date (dd/mm/yyyy)
+To date (dd/mm/yyyy)
+Module (i.e. SOM Admin setting change e.g. Symptom Codes)
+Click ‘Submit’ button to produce the report
+At the ‘File Download’ window (Audit Trail.csv) click the following buttons:
+‘Open’ – to open the Report as csv file on user’s desktop
+‘Save’ – to save the report as csv file to selected location on user’s hard drive
+The csv report will display/be available as in the example below.
+
+"
+183,Audit Trail Report,"
+Clicking the ‘Audit Trail Report’ option allows users with a SOM Administrator access profile to produce a report listing all SOM Administrator changes made, when and by whom for the specified period.
+This report is normally accessed by the SOM Team Manager to:
+Ensure due governance over Pattern Manager changes
+Maintain the integrity of Pattern Manager patterning effectiveness
+Investigate issues, complaints or Post Incident Reviews (PIR)"
+184,Pattern Manager Admin Messages,"
+When an Update to one of the Pattern Manager Admin settings has been successfully completed, a success message will display.
+Select ‘Continue’ to return to Administration Page
+If invalid information is entered or required information is not entered on any of the Pattern Manager Admin options, a pop-up error message will display similar to below
+Click ‘OK’ to return to the Administration Page and enter correct/missing information.
+ 
+ 
+"
+185,Pattern Manager Admin Version 2.0,"
+Pattern Manager Admin Version 2.0 allows SOM staff to configure the way Pattern Manager forms and displays fault patterns.
+Only SOM staff with SOM NODS-PM Super User access level are able to see and access the Pattern Manager Admin Version 2.0 link from the Pattern Manager Home screen.
+To access Pattern Manager Admin to make changes follow these steps:
+On the Patterner Manager Home screen, select the Pattern Manager Admin Version 2.0 option
+Administration Page listing the various available Threshold and Value Configuration options will display
+Select the required ‘Update’ option
+The following functions can be configured from Pattern Manager Admin Version 2.0 option:"
+186,Region Fault Pattern plain text view,"
+Click on the ‘printable’ hyperlink above the Region List
+A new tab will open displaying ALL exchange fault patterns in the region in plain text
+The individual patterns in each exchange will be denoted by separate Pattern Ids"
+187,Exchange plain text,"
+Click on the ‘Scroll’ icon at the left of the blue banner
+A new tab will open displaying the exchange fault pattern in plain text
+The individual patterns will be denoted by separate Pattern Ids"
+188,Plain Text View,"
+Each Exchange and Region can be viewed in plain text view for printing, emailing etc. One advantage of the plain view is that each separate pattern is identified by a unique ID.
+There are 2 plain views available:
+Exchange plain text view
+Region plain text view"
+189,Hyperlinks to Other Patterners,"
+The ‘HP’ columns at the extreme left of the Exchange Pattern screen contain hyperlinks to other Patterners whenever an FNN in one Patterner also appears in another e.g. when a fault which has patterned on a common Pillar in CAN Patterner may also appears in PGS Patterner because it has patterned on a common RIM PGS. 
+Hyperlink function allows cross-referencing between Patterners to discover the true underlying common network element.
+Hyperlink function is used because it is not practical to pattern on and display all network elements that might provide a service on the one screen.
+Each Patterner has been allocated a ‘HP’ hyperlink code letter:
+C	CAN Patterner
+P	PGS Patterner
+S	Switch Patterner
+B	Broadband CAN Patterner
+When a FNN also appears in another Patterner, that code letter will be “active” – i.e. blue underlined text e.g. P
+If a code letter against a particular FNN appears in plain black text and not underlined then the FNN does not appear in that Patterner.
+When an active hyperlink is clicked the following will occur:
+The other Patterner will open - in a new tab - displaying its Exchange Fault Pattern screen with the selected FNN highlighted in blue text
+The windows can then be arranged to best view and compare the pattern information
+Clicking the ‘X’ in the new tab will close it and return the user to the original Patterner."
+190,Table of PSTN Symptom Codes,"
+The following table lists standard SIIAM Symptom (Report) codes selected by FOH consultants to represent the problem being experienced by the customer with their PSTN service and which appear in P{pattern manager fault pattern displays:"
+191,Table of ADSL Symptom Codes,"
+The following table lists the 3 character code conversion from the standard SIIAM 4 character Symptom (Report) codes selected by FOH consultants to represent the problem being experienced by the customer with their ADSL service and which appear in Pattern manager fault pattern displays:"
+192,Create NODS from Patterner,"
+The Create NODS functionality allows SOM consultants to immediately create a NODS outage notification (which will appear in SIIAM) directly from within the Patterner Exchange screen as soon as an outage has been analysed and confirmed.
+This reduces the amount of time and ‘swivel-chairing’ necessary to set-up outages and to notify FOH and customers.
+The Create NODS functionality is available in the following Patterners:
+CAN Patterner
+PGS Patterner
+Switch Patterner
+Follow these steps to Create a NODS using the PM Create NODS function
+From the information in Pattern Manager and external systems (e.g. CASINO, GDD, etc.) confirm the outage and determine the correct network element and pair range
+
+E.g. network element Pillar P1 and O pair range 81-100 have been determined as the correct scope
+
+Using the drop down boxes select:
+
+The CAN network element  - P1
+Enter the pair range 81-100
+
+Click Create NODS button
+
+A NODS will be created ‘semi-automatically’
+NODS ID will appear in the NODS column
+User can click the NODS ID link to view and update the NODS
+The NODS will be created by Pattern Manager with the standard values, ETR and Outage Description as used by SOM to create manual NODS
+A CVH check-off code will be automatically applied
+Some information, e.g. Parent case and CONEN ID and instructions to offer interims will have to be manually added by using the NODs Update button
+NODS created this way will have a Source System of ‘Pattern Manager’ and a Created User of the name of the consultant who used the function
+
+"
+193,Service Types,"
+The following table lists the various NPAMS Service Type codes which indicate the basic service type of each FNN e.g. whether PSTN, ADSL or ISDN"
+194,Update All,"
+Click the ‘No Selection’ drop down list next to the Update All button
+Select the required Check code e.g. LNK
+Tick the check box at the top – this will auto-tick all checkboxes against all faults on the screen
+Click the Update All at the right of the banner
+Actioned check-off codes can be changed by simply re-selecting a new code and clicking ‘Update’ e.g. if a pattern checked off as ‘NYV’ was subsequently found to be an outage, the code can be changed to ‘CVH’.
+Once the exchange screen has been updated, the browser refresh button can be clicked to immediately update the totals in the Exchange list. Otherwise totals will update at the next 10-minute system refresh.
+If a user has created a NODS from within Pattern Manager, the Check List will be automatically updated with CVH and the User ID of the consultant who created the NODS.
+If a NODS has been auto-created by Priority Patterner, the Check List will be automatically updated with AVH – no user ID will be recorded.
+Refer Table Check-off codes"
+195,Multiple Update,"
+Click the ‘No Selection’ drop down list next to the Update All button
+Select the required Check code e.g. CVH
+Tick the check boxes next to each of the faults to be checked off
+Click the Update All at the right of the banner
+
+"
+196,Individual Update,"
+Click the Chk_Lst Drop Down against the fault and select the required code e.g. NYV
+Click the Update button in the centre of the banner
+
+"
+197,Check off Codes,"
+When a fault pattern first displays in Pattern Manager, each fault in the pattern will display its SIIAM case status at the time the pattern was formed e.g. Field-Open or Test-Pending.
+This status appears in a field called the Chk_Lst (Check List) which also contains a series of 3 character codes used by SOM to indicate the results of their analysis of the fault pattern e.g. ‘CVH’ when an outage has been confirmed or ‘NYV’ when an outage has not yet been confirmed.
+The Check Code is used:
+To indicate that a pattern has been analysed and actions
+To alert users to new faults which have arrived within a pattern or which have formed new patterns
+To display the respective volumes and percentages of checked vs unchecked faults in each exchange and region which is an indication of workload and potential risk
+By the Blackhawk interface to display colour coded alerts on the Sauron Switch Patterner display in the GOC which helps alert SAO to potential Switch issues
+The user Id of the staff member who last actioned a check-off code will be recorded in the User column.
+Once a Check code has been selected the screen changes must be saved by use of the ‘Update’ button.
+There are three methods of checking off fault patterns:"
+198,Table Check Off Codes,"
+The following table lists standard check off codes in use by SOM and their meanings:"
+199,Patterner Refresh Rates and Timings,"
+The following table provides an indication of the timeframes and frequency for system refresh of data in each of the Patterners.
+Example: 
+SOM Super User changes CAN Patterner Threshold at 9:27
+Changes will take until 9:30-9:31 to be processed
+New patterns according to changed thresholds will display at next System update 9:35
+"
+200,Functionality common to all Patterners,"
+The following sections describe key functionality, common to all the patterners, in detail.
+The order of the following sections follows the approximate order in which each function will be encountered in the Patterners from left to right."
+201,Document Control Sheet,"
+Who to reach out to if you have any queries, questions, changes or concerns.
+If you have a suggestion for improving this document, please contact the person listed above.
+This publication has been prepared and written by Telstra Corporation Limited (ABN 33 051 775 556), and is copyright. Other than for the purposes of and subject to the conditions prescribed under the Copyright Act, no part of it may in any form or by any means (electronic, mechanical, microcopying, photocopying, recording or otherwise) be reproduced, stored in a retrieval system or transmitted without prior written permission from the document controller. Product or company names are trademarks or registered trademarks of their respective holders.
+Note for non-Telstra readers: The contents of this publication are subject to change without notice. All efforts have been made to ensure the accuracy of this publication. Notwithstanding, Telstra Corporation Limited does not assume responsibility for any errors nor for any consequences arising from any errors in this publication."
+202,Contents,"
+
+
+References
+Attachments
+Definitions"
+203,parent,

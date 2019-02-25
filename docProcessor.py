@@ -15,9 +15,10 @@ import pandas as pd
 import argparse
 
 filePath='./data/nems_111010.docx'
-filePath='./data/sample.docx'
-filePath='./data/Telekom malaysia chatbot Proposal Draft.docx'
-#filePath='./data/017921w14 Pattern Manager 6.0 - Operating User Guide.docx'
+#filePath='./data/sample.docx'
+#filePath='./data/Telekom malaysia chatbot Proposal Draft.docx'
+#filePath='./data/DBS Multiplier Programme_FAQ-converted.docx'
+filePath='./data/017921w14 Pattern Manager 6.0 - Operating User Guide.docx'
 #filePath='./data/Unstructured_Assurance of DOT and TBiz Voice on nbn FTTP.docx'    
 
 class utils:
@@ -178,7 +179,14 @@ def fontExtractor(paragraph, doc):
     headName=paragraph.style.name
     
     if str(paragraph.style.font.size) == 'None':
-        paragraph.style=list(doc.styles)[0]
+        cont=True
+        counter=0
+        while cont:
+            tem=list(doc.styles)[counter].name
+            if tem=='Normal':
+                paragraph.style=list(doc.styles)[counter]
+                cont=False
+            counter+=1
     
     for i in range(len(runs)):
         curRun=runs[i].font
@@ -258,21 +266,45 @@ def getDocTree(filePath):
     docDict=docStore.dictStore
     return docDict
 
-# call this to generate textCSV
-def generateHeaderTextCSV(filePath):
-    doc=Document(filePath)
-    df=docProfileCreator(doc)
-    
-    docStore=docStruct()
-    docStore.processDF(df)
-    docDict=docStore.dictStore
-    docTable=docStore.headerTextCompilation
-    docDF=docStore.headerTextDF
-    docDF.to_csv('header_text.csv')
+def extractRowCells(row):
+    store=[]
+    for count, i in enumerate(list(row.cells)):
+        store.append(i.text)
+    return store
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Process docx files')
-    parser.add_argument("-f", dest='filePath', action="store", default='./data/Telekom malaysia chatbot Proposal Draft.docx', help='input file path')
-    args = parser.parse_args()
+def tableProcessor(doc):
+    tables=list(doc.tables)
+    store=[]
+    for table in tables:
+        rows=list(table.rows)
+        
+        df=pd.DataFrame(columns=extractRowCells(rows[0]))
+#        print(df)
+        for count, row in enumerate(rows):
+            if count>0:
+                df.loc[count]=extractRowCells(row)
+        
+        store.append(df)
     
-    generateHeaderTextCSV(args.filePath)
+    return store
+
+# call this to generate textCSV
+#def generateHeaderTextCSV(filePath):
+doc=Document(filePath)
+df=docProfileCreator(doc)
+
+docStore=docStruct()
+docStore.processDF(df)
+docDict=docStore.dictStore
+docTable=docStore.headerTextCompilation
+docDF=docStore.headerTextDF
+docDF.to_csv('header_text.csv')
+
+tables=tableProcessor(doc)
+
+#if __name__ == "__main__":
+#    parser = argparse.ArgumentParser(description='Process docx files')
+#    parser.add_argument("-f", dest='filePath', action="store", default='./data/Telekom malaysia chatbot Proposal Draft.docx', help='input file path')
+#    args = parser.parse_args()
+#    
+#    generateHeaderTextCSV(args.filePath)
